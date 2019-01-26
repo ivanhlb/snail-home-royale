@@ -24,7 +24,7 @@ public class DodgeTheCrowController : MonoBehaviour
     private GameObject InstructionPanel;
 #pragma warning restore 0649
 
-    private Dictionary<PlayerIndex, DodgeSnail> snails = new Dictionary<PlayerIndex, DodgeSnail>();
+    private DodgeSnail[] snails;
     private GameManager gm;
     private int secondsLeft = 5;
 
@@ -34,8 +34,7 @@ public class DodgeTheCrowController : MonoBehaviour
     }
     public void OnReady(PlayerIndex playerIndex)
     {
-        Dictionary<PlayerIndex, DodgeSnail>.ValueCollection values = snails.Values;
-        foreach (DodgeSnail snail in values)
+        foreach (DodgeSnail snail in snails)
         {
             if (!snail.ready)
             {
@@ -52,26 +51,28 @@ public class DodgeTheCrowController : MonoBehaviour
         finishingX = finishLine.GetPosition(0).x;
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         DodgeSnail[] d = DodgeSnailsPool.GetComponentsInChildren<DodgeSnail>();
+        List<DodgeSnail> s = new List<DodgeSnail>();
         if (gm.playerone)
         {
-            snails.Add(PlayerIndex.PlayerOne, d[0]);
+            s.Add(d[0]);
             d[0].Init(PlayerIndex.PlayerOne);
         }
         if (gm.playertwo)
         {
-            snails.Add(PlayerIndex.PlayerTwo, d[1]);
+            s.Add(d[1]);
             d[1].Init(PlayerIndex.PlayerTwo);
         }
         if (gm.playerthree)
         {
-            snails.Add(PlayerIndex.PlayerThree, d[2]);
+            s.Add(d[2]);
             d[2].Init(PlayerIndex.PlayerThree);
         }
         if (gm.playerfour)
         {
-            snails.Add(PlayerIndex.PlayerFour, d[3]);
+            s.Add(d[3]);
             d[3].Init(PlayerIndex.PlayerFour);
         }
+        snails = s.ToArray();
     }
 
     internal void Win(DodgeSnail snail)
