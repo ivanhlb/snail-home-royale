@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayerSelect.unity
     guid: e51f2df14ffac3a4b97289af0fd901b8
   - enabled: 1
+    path: Assets/Scenes/SnailPace.unity
+    guid: 7a897cfab087c9845acf92df719ea69d
+  - enabled: 1
     path: Assets/Scenes/PassTheSalt2D.unity
     guid: 4066f8bc3ca7915468e79708866fc2f5
   - enabled: 1
@@ -23,7 +26,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DodgeTheCrow.unity
     guid: 7c4de58154ac4ae49b1012a8c6bad32b
-  - enabled: 1
-    path: Assets/Scenes/SnailPace.unity
-    guid: 7a897cfab087c9845acf92df719ea69d
   m_configObjects: {}

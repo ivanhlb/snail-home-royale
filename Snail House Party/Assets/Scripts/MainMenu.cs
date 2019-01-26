@@ -17,6 +17,6 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-        AudioManager.instance.PlayRaceBgm();
+        //AudioManager.instance.PlayRaceBgm();
     }
 }

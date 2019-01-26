@@ -19,6 +19,7 @@ namespace SnailPace
         public PlayerController playerfour;
         public GameObject startPos, endPos;
         public CountdownManager countdownManager;
+        public AudioManager audioManager;
         // Start is called before the first frame update
         void Start()
         {
