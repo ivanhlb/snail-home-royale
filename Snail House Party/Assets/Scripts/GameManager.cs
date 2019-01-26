@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     public int playerthreescore;
     public int playerfourscore;
 
+	Coroutine scoreScreenCoroutine;
+
+	[SerializeField] ScoreScreen scoreScreenPrefab;
+	ScoreScreen scoreScreen;
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
@@ -44,6 +48,38 @@ public class GameManager : MonoBehaviour
 
     public void loadnextgame()
     {
+		if (scoreScreenCoroutine != null)
+			StopCoroutine (scoreScreenCoroutine);
 
-    }
+		scoreScreenCoroutine = StartCoroutine (ScoreScreenCoroutine ());
+	}
+
+	IEnumerator ScoreScreenCoroutine ()
+	{
+		ShowScoreScreen ();
+		yield return new WaitForSeconds (3);
+		HideScoreScreen ();
+		LoadGame ();
+
+		scoreScreenCoroutine = null;
+	}
+
+	void ShowScoreScreen ()
+	{
+		scoreScreen = Instantiate (scoreScreenPrefab, Vector3.zero, Quaternion.identity);
+		scoreScreen.SetScore (1, playeronescore);
+		scoreScreen.SetScore (2, playertwoscore);
+		scoreScreen.SetScore (3, playerthreescore);
+		scoreScreen.SetScore (4, playerfourscore);
+	}
+
+	void HideScoreScreen ()
+	{
+		Destroy (scoreScreen.gameObject);
+	}
+
+	void LoadGame ()
+	{
+		
+	}
 }
