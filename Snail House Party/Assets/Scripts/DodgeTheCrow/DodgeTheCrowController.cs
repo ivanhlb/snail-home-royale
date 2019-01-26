@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
-using System;
 
 public class DodgeTheCrowController : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class DodgeTheCrowController : MonoBehaviour
     [SerializeField]
     private GameObject InstructionPanel;
 #pragma warning restore 0649
-
+    public bool gameWon { get; private set; } = false;
     private DodgeSnail[] snails;
     private GameManager gm;
     private int secondsLeft = 5;
@@ -73,11 +72,38 @@ public class DodgeTheCrowController : MonoBehaviour
             d[3].Init(PlayerIndex.PlayerFour);
         }
         snails = s.ToArray();
+        if (snails.Length == 0)
+        {
+            s.Add(d[0]);
+            d[0].Init(PlayerIndex.PlayerOne);
+            snails = new DodgeSnail[1] { d[0] };
+        }
     }
 
     internal void Win(DodgeSnail snail)
     {
         Debug.LogFormat("{0} won!", snail.playerIndex.ToString());
+        gameWon = true;
+        switch (snail.playerIndex)
+        {
+            case PlayerIndex.PlayerOne:
+                gm.Addplayeronescore(1);
+                break;
+            case PlayerIndex.PlayerTwo:
+                gm.Addplayertwoscore(1);
+                break;
+            case PlayerIndex.PlayerThree:
+                gm.Addplayerthreescore(1);
+                break;
+            case PlayerIndex.PlayerFour:
+                gm.Addplayerfourscore(1);
+                break;
+            default:
+                //gg
+                break;
+        }
+
+        gm.loadnextgame();
     }
 
     IEnumerator CountDownCorountine()
