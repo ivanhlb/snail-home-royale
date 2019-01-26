@@ -7,16 +7,20 @@ namespace SnailPace
 
     public class PlayerController : MonoBehaviour
     {
-        int buttonMash = 0, winCounter = 100, comboMeter = 0, idle_delay = 10, idle_counter = 0;
+        GameManager gm;
+        public GameObject startPos, endPos;
+        int buttonMash = 0, comboMeter = 0, idle_delay = 10, idle_counter = 0, boost_multiplier = 5;
         string prevButton, joystick;
-        float pace = 0.1f, boost = 0.5f;
-        public int playerid;
-        bool isWalking = false;
+        float pace = 0.0f, boost = 0.0f, fade = 0.2f;
+        public int playerid, winCounter = 100;
         [SerializeField] private Animator animator;
         // Start is called before the first frame update
         void Start()
         {
-
+            gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            float diff = endPos.transform.position.x - startPos.transform.position.x;
+            pace = diff / winCounter;
+            boost = pace * boost_multiplier;
         }
 
         // Update is called once per frame
@@ -25,8 +29,32 @@ namespace SnailPace
             idle_counter--;
             if (idle_counter == 0)
             {
-                animator.CrossFade("snail_idle", 0.2f);
+                animator.CrossFade("snail_idle", fade);
             }
+
+            //to count if player won
+            if (winCounter <= 0)
+            {
+
+                switch (playerid)
+                {
+                    case 1:
+                        gm.Addplayeronescore(1);
+                        break;
+                    case 2:
+                        gm.Addplayertwoscore(1);
+                        break;
+                    case 3:
+                        gm.Addplayerthreescore(1);
+                        break;
+                    case 4:
+                        gm.Addplayerfourscore(1);
+                        break;
+                }
+                gm.loadnextgame();
+                return;
+            }
+
             //button mash calculation
             switch (playerid)
             {
@@ -37,11 +65,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "s";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick1Button1))
                     {
@@ -49,11 +82,17 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
+
                         buttonMash++;
                         prevButton = "x";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick1Button2))
                     {
@@ -61,11 +100,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "c";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick1Button3))
                     {
@@ -73,11 +117,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "t";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     break;
                 case 2:
@@ -87,11 +136,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "s";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick2Button1))
                     {
@@ -99,11 +153,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "x";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick2Button2))
                     {
@@ -111,11 +170,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "c";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick2Button3))
                     {
@@ -123,11 +187,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "t";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     break;
                 case 3:
@@ -137,11 +206,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "x";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick3Button1))
                     {
@@ -149,11 +223,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "s";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick3Button2))
                     {
@@ -161,11 +240,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "c";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick3Button3))
                     {
@@ -173,11 +257,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "t";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     break;
                 case 4:
@@ -187,11 +276,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "s";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick4Button1))
                     {
@@ -199,11 +293,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "x";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick4Button2))
                     {
@@ -211,11 +310,16 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "c";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick4Button3))
                     {
@@ -223,35 +327,39 @@ namespace SnailPace
                         {
                             comboMeter++;
                         }
+                        else
+                        {
+                            comboMeter = 0;
+                        }
                         buttonMash++;
                         prevButton = "t";
                         transform.Translate(Vector3.right * pace);
-                        animator.CrossFade("snail_walk", 0.2f);
+                        animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        winCounter--;
                     }
                     break;
             }
 
-            //C-C-C-C-Combbbo
+
+
+            //C-C-C-C-Combbbo Extra Move Speed
             if (comboMeter >= 4)
             {
-                buttonMash += 20;
+                if (winCounter > boost_multiplier)
+                {
+                    transform.Translate(Vector3.right * boost);
+                    winCounter -= boost_multiplier;
+                }
+                else
+                {
+                    transform.Translate(endPos.transform.position.x - this.transform.position.x, 0, 0);
+                    winCounter = 0;
+                }
                 comboMeter = 0;
+
             }
 
-            //to move boost forward
-            if (buttonMash >= 20)
-            {
-                transform.Translate(Vector3.right * boost);
-                buttonMash = 0;
-                winCounter--;
-            }
-
-            //to count if player won
-            if (winCounter == 0)
-            {
-                //win function
-            }
         }
 
     }
