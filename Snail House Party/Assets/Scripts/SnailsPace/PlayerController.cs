@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace SnailPace
 {
 
@@ -15,13 +14,15 @@ namespace SnailPace
         int buttonMash = 0, comboMeter = 0, idle_delay = 10, idle_counter = 0, boost_multiplier = 5;
         string prevButton, joystick;
         float pace = 0.0f, boost = 0.0f, fade = 0.2f;
-        bool isFinished = false;
+        bool bgmPlayed = false, soundPlayed = false;
         public int playerid, winCounter = 100;
         [SerializeField] private Animator animator;
+        
         // Start is called before the first frame update
         void Start()
         {
             gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            
             float diff = endPos.transform.position.x - startPos.transform.position.x;
             pace = diff / winCounter;
             boost = pace * boost_multiplier;
@@ -134,15 +135,21 @@ namespace SnailPace
             {
                 return;
             }
-            if (isFinished)
+            if (!bgmPlayed)
             {
-                return;
+                AudioManager.instance.PlayRaceBgm();
+                bgmPlayed = true;
             }
 
             idle_counter--;
             if (idle_counter == 0)
             {
                 animator.CrossFade("snail_idle", fade);
+            }
+
+            if (RaceGameManager.Instance.raceOver)
+            {
+                return;
             }
 
             //to count if player won
@@ -165,7 +172,7 @@ namespace SnailPace
                         break;
                 }
                 gm.loadnextgame();
-                isFinished = true;
+                RaceGameManager.Instance.raceOver = true;
             }
 
             //button mash calculation
@@ -187,6 +194,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick1Button1))
@@ -205,6 +213,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick1Button2))
@@ -222,6 +231,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick1Button3))
@@ -239,6 +249,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     break;
@@ -258,6 +269,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick2Button1))
@@ -275,6 +287,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick2Button2))
@@ -292,6 +305,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick2Button3))
@@ -309,6 +323,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     break;
@@ -328,6 +343,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick3Button1))
@@ -345,6 +361,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick3Button2))
@@ -362,6 +379,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick3Button3))
@@ -379,6 +397,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     break;
@@ -398,6 +417,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick4Button1))
@@ -415,6 +435,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick4Button2))
@@ -432,6 +453,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     if (Input.GetKeyDown(KeyCode.Joystick4Button3))
@@ -449,6 +471,7 @@ namespace SnailPace
                         transform.Translate(Vector3.right * pace);
                         animator.CrossFade("snail_walk", fade);
                         idle_counter = idle_delay;
+                        RaceAudioManager.Instance.PlayFootstep(playerid);
                         winCounter--;
                     }
                     break;
