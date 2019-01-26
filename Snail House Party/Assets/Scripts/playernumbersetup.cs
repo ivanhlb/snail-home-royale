@@ -92,7 +92,8 @@ public class playernumbersetup : MonoBehaviour
             gm.playerfour = !gm.playerfour;
         }
 
-        if (gm.playerone && gm.playertwo || gm.playerone && gm.playerthree || gm.playerone && gm.playerfour || gm.playertwo && gm.playerthree || gm.playertwo && gm.playerfour || gm.playerthree && gm.playerfour || gm.playerone && gm.playertwo && gm.playerthree && gm.playerfour) {
+        if (gm.playerone && gm.playertwo || gm.playerone && gm.playerthree || gm.playerone && gm.playerfour || gm.playertwo && gm.playerthree || gm.playertwo && gm.playerfour || gm.playerthree && gm.playerfour || gm.playerone && gm.playertwo && gm.playerthree && gm.playerfour)
+        {
             if (Input.GetKeyUp(KeyCode.Joystick1Button9) || Input.GetKeyUp(KeyCode.Joystick2Button9) || Input.GetKeyUp(KeyCode.Joystick3Button9) || Input.GetKeyUp(KeyCode.Joystick4Button9))
             {
                 SceneManager.LoadScene(2);

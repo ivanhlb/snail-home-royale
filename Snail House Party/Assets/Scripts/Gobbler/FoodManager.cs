@@ -34,10 +34,15 @@ namespace Gobbler
 
 		Coroutine[] playerStunTimers = new Coroutine[4] { null, null, null, null };
 
+		[SerializeField] PlayerController playerControllerPrefab;
+		PlayerController[] playerControllers = new PlayerController[4];
+
+		[SerializeField] Color[] playerColors;
+
+		[SerializeField] float playerVerticalOffset = -0.3f;
 
 		float p1HorPrev;
 		float p1VertPrev;
-
 
 		float p2HorPrev;
 		float p2VertPrev;
@@ -53,6 +58,7 @@ namespace Gobbler
 		{
 			gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 			GenerateFoodSequence ();
+			CreatePlayers ();
 		}
 
 		void Start ()
@@ -112,6 +118,31 @@ namespace Gobbler
 				}
 
 				yOffset += rowHeightOffset;
+			}
+		}
+
+		void CreatePlayers ()
+		{
+			if (gm.playerone)
+				playerControllers[0] = Instantiate (playerControllerPrefab);
+
+			if (gm.playertwo)
+				playerControllers[1] = Instantiate (playerControllerPrefab);
+
+			if (gm.playerthree)
+				playerControllers[2] = Instantiate (playerControllerPrefab);
+
+			if (gm.playerfour)
+				playerControllers[3] = Instantiate (playerControllerPrefab);
+
+			//position players
+			for (int i = 0; i < 4; i++)
+			{
+				Vector3 playerPos = playerLanePositions[i].transform.position;
+				playerPos.y += playerVerticalOffset;
+				playerControllers[i].transform.position = playerPos;
+
+				playerControllers[i].SetShellColour (playerColors[i]);
 			}
 		}
 
@@ -323,6 +354,24 @@ namespace Gobbler
 				playerProgress[playerIndex]++;
 
 				//play eating animation
+				playerControllers[playerIndex].Gobble ();
+				Vector3 playerPos = playerLanePositions[playerIndex].transform.position;
+				playerPos.y += playerVerticalOffset;
+
+				switch (inputRow)
+				{
+					case InputRow.Left:
+						playerPos.x += -laneOffset;
+						break;
+					default:
+					case InputRow.Center:
+						break;
+					case InputRow.Right:
+						playerPos.x += laneOffset;
+						break;
+				}
+
+				playerControllers[playerIndex].transform.position = playerPos;
 
 				//remove food from lane
 				Transform toRemove = playerLanePositions[playerIndex].GetChild (0);
@@ -365,6 +414,7 @@ namespace Gobbler
 				stunTimer = StartCoroutine (UnstunPlayer (playerIndex));
 
 				//play stun animation
+				playerControllers[playerIndex].GetStunned ();
 				Debug.Log ("stunned");
 			}
 		}
@@ -376,7 +426,7 @@ namespace Gobbler
 			playerStunTimers[playerIndex] = null;
 
 			//stop stun animation
-
+			playerControllers[playerIndex].GetUnstunned ();
 		}
 
 		void MoveFood ()
@@ -405,7 +455,7 @@ namespace Gobbler
 
 					if (child == lowestFood)
 						continue;
-						
+
 					float newY = Mathf.MoveTowards (child.localPosition.y, (lane.GetChild (j - 1).transform.localPosition.y + rowHeightOffset), foodMoveSpeed * Time.deltaTime);
 					Vector3 localPos = child.localPosition;
 					localPos.y = newY;
