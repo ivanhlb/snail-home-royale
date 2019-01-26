@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     public bool playerthree = false;
     public bool playerfour = false;
 
+    int playeronescore;
+    int playertwoscore;
+    int playerthreescore;
+    int playerfourscore;
+
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
@@ -20,15 +25,20 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
     }
-    // Start is called before the first frame update
-    void Start()
+    public void Addplayeronescore(int score)
     {
-        
+        playeronescore += score;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Addplayertwoscore(int score)
     {
-        
+        playertwoscore += score;
+    }
+    public void Addplayerthreescore(int score)
+    {
+        playerthreescore += score;
+    }
+    public void Addplayerfourscore(int score)
+    {
+        playerfourscore += score;
     }
 }
