@@ -1,21 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.UI;
+
 public class DodgeTheCrowController : MonoBehaviour
 {
+
     public static DodgeTheCrowController instance { get; private set; }
     public bool inInstructions { get { return InstructionPanel.activeSelf; } }
+    public bool gameStarted { get; private set; } = false;
 #pragma warning disable 0649
+    [SerializeField]
+    private Text countdownText;
     [SerializeField]
     private LineRenderer startingLine;
     [SerializeField]
     private Transform DodgeSnailsPool;
     [SerializeField]
     private GameObject InstructionPanel;
-    private Dictionary<PlayerIndex, DodgeSnail> snails = new Dictionary<PlayerIndex, DodgeSnail>();
 #pragma warning restore 0649
 
+    private Dictionary<PlayerIndex, DodgeSnail> snails = new Dictionary<PlayerIndex, DodgeSnail>();
     private GameManager gm;
-
+    private int secondsLeft = 5;
+    private bool debug = true;
     private void Awake()
     {
         instance = this;
@@ -32,6 +40,7 @@ public class DodgeTheCrowController : MonoBehaviour
         }
         //clear instruction screen
         InstructionPanel.SetActive(false);
+        StartCoroutine(CountDownCorountine());
     }
     private void Start()
     {
@@ -58,6 +67,12 @@ public class DodgeTheCrowController : MonoBehaviour
             snails.Add(PlayerIndex.PlayerFour, d[3]);
             d[3].Init(PlayerIndex.PlayerFour);
         }
+        //for debugging
+        if (snails.Count == 0)
+        {
+            snails.Add(PlayerIndex.PlayerOne, d[0]);
+            d[0].Init(PlayerIndex.PlayerOne);
+        }
         //line them up.
         LineUp();
     }
@@ -65,10 +80,12 @@ public class DodgeTheCrowController : MonoBehaviour
     {
         int padding = 2;
         Vector3 pointA = startingLine.GetPosition(0);
+        pointA.x -= 1;
         Vector3 pointB = startingLine.GetPosition(1);
+        pointB.x -= 1;
         Vector3 currPos = pointA;
 
-        float disSpread = (Vector3.Distance(pointA, pointB) - padding) / snails.Count;
+        float disSpread = (Vector3.Distance(pointA, pointB) - padding) / (snails.Count + 1);
         Dictionary<PlayerIndex, DodgeSnail>.ValueCollection values = snails.Values;
 
         foreach (DodgeSnail s in values)
@@ -76,5 +93,23 @@ public class DodgeTheCrowController : MonoBehaviour
             currPos.y += disSpread;
             s.transform.position = currPos;
         }
+        if (debug)
+        {
+            OnReady(PlayerIndex.PlayerOne);      
+        }
+    }
+    IEnumerator CountDownCorountine()
+    {
+        WaitForSecondsRealtime waitOneSec = new WaitForSecondsRealtime(1f);
+        countdownText.gameObject.SetActive(true);
+        while (secondsLeft > 0)
+        {
+            yield return waitOneSec;
+            countdownText.text = (--secondsLeft).ToString();
+        }
+        //start game officially.
+        countdownText.gameObject.SetActive(false);
+        gameStarted = true;
+        yield return null;
     }
 }
