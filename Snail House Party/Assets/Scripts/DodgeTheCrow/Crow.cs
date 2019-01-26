@@ -98,8 +98,14 @@ public class Crow : AnimatedSprite
         }
         yield return null;
     }
+    private void OnDisable()
+    {
+        
+    }
     private void Update()
     {
+        if (DodgeTheCrowController.instance.gameWon)
+            enabled = false;
         if (isAlert)
         {
             alertTimeLeft -= Time.deltaTime;
