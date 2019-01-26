@@ -72,19 +72,11 @@ public class DodgeTheCrowController : MonoBehaviour
             snails.Add(PlayerIndex.PlayerFour, d[3]);
             d[3].Init(PlayerIndex.PlayerFour);
         }
-        //for debugging
-        if (snails.Count == 0)
-        {
-            snails.Add(PlayerIndex.PlayerOne, d[0]);
-            d[0].Init(PlayerIndex.PlayerOne);
-            snails.Add(PlayerIndex.PlayerTwo, d[1]);
-            d[1].Init(PlayerIndex.PlayerTwo);
-        }
     }
 
-    internal void Win()
+    internal void Win(DodgeSnail snail)
     {
-        Debug.Log("win!");
+        Debug.LogFormat("{0} won!", snail.playerIndex.ToString());
     }
 
     IEnumerator CountDownCorountine()

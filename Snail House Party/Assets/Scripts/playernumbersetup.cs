@@ -99,9 +99,5 @@ public class playernumbersetup : MonoBehaviour
                 SceneManager.LoadScene(2);
             }
         }
-        else if (Input.GetKeyUp(KeyCode.F1))
-        {
-            SceneManager.LoadScene(1);
-        }
     }
 }
