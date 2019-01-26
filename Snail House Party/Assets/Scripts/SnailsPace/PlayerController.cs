@@ -9,6 +9,7 @@ namespace SnailPace
     {
         GameManager gm;
 
+        public GameObject[] shell;
         public GameObject startPos, endPos;
         public CountdownManager countdownManager;
         int buttonMash = 0, comboMeter = 0, idle_delay = 10, idle_counter = 0, boost_multiplier = 5;
@@ -24,6 +25,106 @@ namespace SnailPace
             float diff = endPos.transform.position.x - startPos.transform.position.x;
             pace = diff / winCounter;
             boost = pace * boost_multiplier;
+            if (playerid == 1)
+            {
+                if (gm.playeronescore <= 0)
+                {
+                    shell[0].SetActive(true);
+                }
+                else if (gm.playeronescore == 1)
+                {
+                    shell[1].SetActive(true);
+                }
+                else if (gm.playeronescore == 2)
+                {
+                    shell[2].SetActive(true);
+                }
+                else if (gm.playeronescore == 3)
+                {
+                    shell[2].SetActive(true);
+                    shell[3].SetActive(true);
+                }
+                else if (gm.playeronescore == 4)
+                {
+                    shell[2].SetActive(true);
+                    shell[4].SetActive(true);
+                }
+            }
+            if (playerid == 2)
+            {
+                if (gm.playertwoscore <= 0)
+                {
+                    shell[0].SetActive(true);
+                }
+                else if (gm.playertwoscore == 1)
+                {
+                    shell[1].SetActive(true);
+                }
+                else if (gm.playertwoscore == 2)
+                {
+                    shell[2].SetActive(true);
+                }
+                else if (gm.playertwoscore == 3)
+                {
+                    shell[2].SetActive(true);
+                    shell[3].SetActive(true);
+                }
+                else if (gm.playertwoscore == 4)
+                {
+                    shell[2].SetActive(true);
+                    shell[4].SetActive(true);
+                }
+            }
+            if (playerid == 3)
+            {
+                if (gm.playerthreescore <= 0)
+                {
+                    shell[0].SetActive(true);
+                }
+                else if (gm.playerthreescore == 1)
+                {
+                    shell[1].SetActive(true);
+                }
+                else if (gm.playerthreescore == 2)
+                {
+                    shell[2].SetActive(true);
+                }
+                else if (gm.playerthreescore == 3)
+                {
+                    shell[2].SetActive(true);
+                    shell[3].SetActive(true);
+                }
+                else if (gm.playerthreescore == 4)
+                {
+                    shell[2].SetActive(true);
+                    shell[4].SetActive(true);
+                }
+            }
+            if (playerid == 4)
+            {
+                if (gm.playerfourscore <= 0)
+                {
+                    shell[0].SetActive(true);
+                }
+                else if (gm.playerfourscore == 1)
+                {
+                    shell[1].SetActive(true);
+                }
+                else if (gm.playerfourscore == 2)
+                {
+                    shell[2].SetActive(true);
+                }
+                else if (gm.playerfourscore == 3)
+                {
+                    shell[2].SetActive(true);
+                    shell[3].SetActive(true);
+                }
+                else if (gm.playerfourscore == 4)
+                {
+                    shell[2].SetActive(true);
+                    shell[4].SetActive(true);
+                }
+            }
         }
 
         // Update is called once per frame

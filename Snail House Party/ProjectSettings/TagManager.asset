@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameManager
   - bomb
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - background
+  - salt
+  - snails
   - 
   - 
   - 
@@ -42,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 1465777263
+    locked: 0
+  - name: salt
+    uniqueID: 1676661957
+    locked: 0
+  - name: snails
+    uniqueID: 3477548827
     locked: 0
