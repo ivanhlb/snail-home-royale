@@ -209,8 +209,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d798e88c1d95204ca5ad01d22eea654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shell:
+  - {fileID: 8313078872155491564}
+  - {fileID: 7028553377207683056}
+  - {fileID: 5051427944181644377}
+  - {fileID: 9078500315092835677}
+  - {fileID: 9082401856502530271}
   startPos: {fileID: 0}
   endPos: {fileID: 0}
+  countdownManager: {fileID: 0}
   playerid: 1
   winCounter: 100
   animator: {fileID: 6651727889504073786}
