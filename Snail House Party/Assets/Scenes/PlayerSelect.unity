@@ -548,6 +548,8 @@ MonoBehaviour:
   playertwo: 0
   playerthree: 0
   playerfour: 0
+  scoreScreenPrefab: {fileID: 1820187582690212224, guid: d8ab9f6b92af0ce43ab0052455346b9d,
+    type: 3}
 --- !u!4 &1139607200
 Transform:
   m_ObjectHideFlags: 0

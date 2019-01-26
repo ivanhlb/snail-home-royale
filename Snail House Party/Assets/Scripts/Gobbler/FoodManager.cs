@@ -328,6 +328,28 @@ namespace Gobbler
 				Transform toRemove = playerLanePositions[playerIndex].GetChild (0);
 				toRemove.SetParent (null);
 				Destroy (toRemove.gameObject);
+
+				//check for game win
+				if (playerLanePositions[playerIndex].childCount == 0)
+				{
+					switch (playerIndex)
+					{
+						case 0:
+							gm.Addplayeronescore (1);
+							break;
+						case 1:
+							gm.Addplayertwoscore (1);
+							break;
+						case 2:
+							gm.Addplayerthreescore (1);
+							break;
+						case 3:
+							gm.Addplayerfourscore (1);
+							break;
+					}
+
+					gm.loadnextgame ();
+				}
 			}
 			else
 			{
