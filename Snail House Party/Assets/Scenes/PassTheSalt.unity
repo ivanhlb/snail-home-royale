@@ -685,7 +685,7 @@ MonoBehaviour:
   playercontroller: {fileID: 150569209}
   target: {fileID: 0}
   timetokill: 5
-  speed: 10
+  speed: 1000
 --- !u!23 &2089868466
 MeshRenderer:
   m_ObjectHideFlags: 0

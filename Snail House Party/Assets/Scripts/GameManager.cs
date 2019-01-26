@@ -41,4 +41,9 @@ public class GameManager : MonoBehaviour
     {
         playerfourscore += score;
     }
+
+    public void loadnextgame()
+    {
+
+    }
 }

@@ -42,7 +42,7 @@ public class bomb : MonoBehaviour
         if (target != null)
         {
             float step = speed * Time.deltaTime;
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, step);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3 (target.transform.position.x, this.transform.position.y, target.transform.position.z), step);
         }
 
         if (controller.playerplaying.Count > 1)
