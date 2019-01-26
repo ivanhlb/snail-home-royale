@@ -69,6 +69,10 @@ public class DodgeSnail : AnimatedSprite
                 newPos = transform.position;
                 newPos.x += 0.2f;
                 transform.position = Vector3.MoveTowards(transform.position, newPos, 0.15f);
+                if (transform.position.x >= DodgeTheCrowController.instance.finishingX)
+                {
+                    DodgeTheCrowController.instance.Win();
+                }
                 animator.SetBool(animParamHash, true);
                 if(Crow.instance)
                 {

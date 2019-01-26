@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class DodgeTheCrowController : MonoBehaviour
 {
 
     public static DodgeTheCrowController instance { get; private set; }
+    public float finishingX;
     public bool inInstructions { get { return InstructionPanel.activeSelf; } }
     public bool gameStarted { get; private set; } = false;
 #pragma warning disable 0649
@@ -47,6 +49,7 @@ public class DodgeTheCrowController : MonoBehaviour
     private void Start()
     {
         //display instructions
+        finishingX = finishLine.GetPosition(0).x;
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         DodgeSnail[] d = DodgeSnailsPool.GetComponentsInChildren<DodgeSnail>();
         if (gm.playerone)
@@ -78,7 +81,12 @@ public class DodgeTheCrowController : MonoBehaviour
             d[1].Init(PlayerIndex.PlayerTwo);
         }
     }
-    
+
+    internal void Win()
+    {
+        Debug.Log("win!");
+    }
+
     IEnumerator CountDownCorountine()
     {
         WaitForSecondsRealtime waitOneSec = new WaitForSecondsRealtime(1f);
