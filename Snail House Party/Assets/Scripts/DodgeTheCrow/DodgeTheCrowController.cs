@@ -15,6 +15,8 @@ public class DodgeTheCrowController : MonoBehaviour
     [SerializeField]
     private LineRenderer startingLine;
     [SerializeField]
+    private LineRenderer finishLine;
+    [SerializeField]
     private Transform DodgeSnailsPool;
     [SerializeField]
     private GameObject InstructionPanel;
@@ -23,7 +25,7 @@ public class DodgeTheCrowController : MonoBehaviour
     private Dictionary<PlayerIndex, DodgeSnail> snails = new Dictionary<PlayerIndex, DodgeSnail>();
     private GameManager gm;
     private int secondsLeft = 5;
-    private bool debug = true;
+
     private void Awake()
     {
         instance = this;
@@ -72,6 +74,8 @@ public class DodgeTheCrowController : MonoBehaviour
         {
             snails.Add(PlayerIndex.PlayerOne, d[0]);
             d[0].Init(PlayerIndex.PlayerOne);
+            snails.Add(PlayerIndex.PlayerTwo, d[1]);
+            d[1].Init(PlayerIndex.PlayerTwo);
         }
     }
     

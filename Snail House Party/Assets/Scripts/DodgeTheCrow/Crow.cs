@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -7,6 +8,7 @@ public class Crow : AnimatedSprite
 {
     public static Crow instance;
 
+#pragma warning disable 0649
     [SerializeField]
     private Text indicator;
     [SerializeField]
@@ -15,14 +17,19 @@ public class Crow : AnimatedSprite
     private AudioClip SquakAudio;
     [SerializeField]
     private AudioClip AttackAudio;
-    private int attackHash, idleHash, turnHash;
-    private float timeLeft = 1.5f;
-    private bool isLooking;
+#pragma warning restore 0649
 
+    private int attackHash, idleHash, turnHash;
+    private bool isAlert = false;
+    private Coroutine swoop;
+    private int waittoTurnTimer;
+    private float alertTimeLeft = 1.5f;
+    private Vector3 origPos;
     override protected void Awake()
     {
         base.Awake();
         instance = this;
+        origPos = transform.position;
     }
     private void Start()
     {
@@ -32,7 +39,8 @@ public class Crow : AnimatedSprite
     }
     public void Idle()
     {
-        isLooking = false;
+        isAlert = false;
+        sp.flipX = false;
         indicator.text = "...";
         indicator.color = Color.black;
     }
@@ -41,38 +49,88 @@ public class Crow : AnimatedSprite
         indicator.text = "?";
         indicator.color = Color.yellow;
     }
-    public void Look()
+    public void Alert()
     {
         indicator.text = "!";
-        isLooking = true;
+        isAlert = true;
         indicator.color = Color.red;
     }
-    private void AttackSnail()
+    private void AttackSnail(DodgeSnail snail)
     {
-
+        audiosource.clip = AttackAudio;
+        animator.CrossFade(attackHash, 0.1f);
+        sp.flipX = true;
+        alertTimeLeft = 1.5f;
+        if (swoop == null)
+        {
+            swoop = StartCoroutine(SwoopCoroutine(snail));
+        }
     }
     public void OnSnailMoved(DodgeSnail snail)
     {
-        if (isLooking)
+        if (isAlert)
         {
-            snail.resetPosition();
+            AttackSnail(snail);
         }
     }
 
     internal void Init()
     {
         //start the audio.
-        audiosource.Play();
+        StartCoroutine(PlaySquaksCoroutine());
         indicator.color = Color.black;
+    }
+    IEnumerator PlaySquaksCoroutine()
+    {
+        waittoTurnTimer = Random.Range(2, 7);
+        while (enabled)
+        {
+            if (audiosource.clip == SquakAudio)
+            {
+                audiosource.Play();
+                yield return new WaitForSecondsRealtime(audiosource.clip.length);
+                if (--waittoTurnTimer == 0)
+                {
+                    animator.CrossFade(turnHash, 0.2f);
+                }
+            }
+            else yield return null;
+        }
+        yield return null;
     }
     private void Update()
     {
-        Vector3 v = indicator.transform.position;
-        v.y = (transform.position.y * 10) + 160;
-        indicator.transform.position = v;
-        if(Random.value < 0.1)
+        if (isAlert)
         {
-            animator.CrossFade("Attack", 0.2f);
+            alertTimeLeft -= Time.deltaTime;
         }
+        if (alertTimeLeft <= 0)
+        {
+            Idle();
+            alertTimeLeft = 1.5f;
+            waittoTurnTimer = Random.Range(2, 7);
+            animator.CrossFade(idleHash, 0.1f);
+        }
+
+    }
+    IEnumerator SwoopCoroutine(DodgeSnail snail)
+    {
+        Vector3 destination = snail.transform.position;
+        snail.spriteRenderer.enabled = false;
+        while (Vector3.SqrMagnitude(transform.position - destination) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, destination, 0.5f);
+            yield return null;
+        }
+        snail.transform.position = snail.startPos;
+        snail.spriteRenderer.enabled = true;
+        while (Vector3.SqrMagnitude(transform.position - origPos) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, origPos, 0.5f);
+            yield return null;
+        }
+        //done catching.
+        audiosource.clip = SquakAudio;
+        yield return swoop = null;
     }
 }

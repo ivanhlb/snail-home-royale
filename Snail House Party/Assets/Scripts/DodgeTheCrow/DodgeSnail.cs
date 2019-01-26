@@ -25,16 +25,19 @@ public class DodgeSnail : AnimatedSprite
     
     public void Init(PlayerIndex index)
     {
+        startPos = transform.position;
         AnimatorControllerParameter[] test = animator.parameters;
         animParamHash = Array.Find(test, x => { return x.name == "IsMoving"; }).nameHash;
         playerIndex = index;
         switch (playerIndex)
         {
             case PlayerIndex.PlayerOne:
-                personalButton = KeyCode.Joystick1Button1;
+                personalButton = KeyCode.X;
+                //personalButton = KeyCode.Joystick1Button1;
                 break;
             case PlayerIndex.PlayerTwo:
-                personalButton = KeyCode.Joystick2Button1;
+                personalButton = KeyCode.LeftArrow;
+                //personalButton = KeyCode.Joystick2Button1;
                 break;
             case PlayerIndex.PlayerThree:
                 personalButton = KeyCode.Joystick3Button1;
@@ -49,16 +52,11 @@ public class DodgeSnail : AnimatedSprite
         isInit = true;
     }
 
-    internal void resetPosition()
-    {
-        sp.enabled = false;
-    }
-
     private void Update()
     {
         if (!isInit)
             return;
-        if (Input.GetKeyUp(personalButton) || Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(personalButton))
         {
             if (DodgeTheCrowController.instance.inInstructions)
             {
@@ -70,7 +68,7 @@ public class DodgeSnail : AnimatedSprite
                 isMoving = true;
                 newPos = transform.position;
                 newPos.x += 0.2f;
-                transform.position = Vector3.MoveTowards(transform.position, newPos, 0.05f);
+                transform.position = Vector3.MoveTowards(transform.position, newPos, 0.15f);
                 animator.SetBool(animParamHash, true);
                 if(Crow.instance)
                 {
