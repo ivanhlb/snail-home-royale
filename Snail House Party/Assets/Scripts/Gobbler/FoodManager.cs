@@ -26,13 +26,27 @@ namespace Gobbler
 
 		GameManager gm;
 
-		int[] foodSequence;
+		[SerializeField] int[] foodSequence;
 
-		int[] playerProgress = new int[4] { 0, 0, 0, 0 };
+		[SerializeField] int[] playerProgress = new int[4] { 0, 0, 0, 0 };
 
 		bool[] playerStunned = new bool[4] { false, false, false, false };
 
 		Coroutine[] playerStunTimers = new Coroutine[4] { null, null, null, null };
+
+
+		float p1HorPrev;
+		float p1VertPrev;
+
+
+		float p2HorPrev;
+		float p2VertPrev;
+
+		float p3HorPrev;
+		float p3VertPrev;
+
+		float p4HorPrev;
+		float p4VertPrev;
 
 		// Start is called before the first frame update
 		void Awake ()
@@ -57,7 +71,7 @@ namespace Gobbler
 		void Update ()
 		{
 			DetectInputs ();
-			//MoveFood ();
+			MoveFood ();
 		}
 
 		void GenerateFoodSequence ()
@@ -121,30 +135,154 @@ namespace Gobbler
 				float hAxisValue = Input.GetAxisRaw (hCheckedAxis);
 				float vAxisValue = Input.GetAxisRaw (vCheckedAxis);
 
-				Debug.Log (hCheckedAxis + " " + hAxisValue);
-				Debug.Log (vCheckedAxis + " " + vAxisValue);
+				float prevHorInput = 0;
+				float prevVertInput = 0;
 
-				if (hAxisValue != 0)
+				switch (i)
+				{
+					case 0:
+						prevHorInput = p1HorPrev;
+						prevVertInput = p1VertPrev;
+						break;
+					case 1:
+						prevHorInput = p2HorPrev;
+						prevVertInput = p2VertPrev;
+						break;
+					case 2:
+						prevHorInput = p3HorPrev;
+						prevVertInput = p3VertPrev;
+						break;
+					case 3:
+						prevHorInput = p4HorPrev;
+						prevVertInput = p4VertPrev;
+						break;
+				}
+
+				if (hAxisValue == 0 && prevHorInput != 0)
 				{
 					//horizontal axis is -1 or 1
-					if (hAxisValue > 0)
+					if (prevHorInput > 0)
 					{
 						//left row
-						TryEatFood (InputRow.Left, i);
+						TryEatFood (InputRow.Right, i);
 					}
 					else
 					{
 						//right row
-						TryEatFood (InputRow.Right, i);
+						TryEatFood (InputRow.Left, i);
 					}
 				}
 
-				if (vAxisValue != 0)
+				if (vAxisValue == 0 && prevVertInput != 0)
 				{
 					//vertical axis is -1 or 1
 					TryEatFood (InputRow.Center, i);
 				}
+
+
+				switch (i)
+				{
+					case 0:
+						p1HorPrev = hAxisValue;
+						p1VertPrev = vAxisValue;
+						break;
+					case 1:
+						p2HorPrev = hAxisValue;
+						p2VertPrev = vAxisValue;
+						break;
+					case 2:
+						p3HorPrev = hAxisValue;
+						p3VertPrev = vAxisValue;
+						break;
+					case 3:
+						p4HorPrev = hAxisValue;
+						p4VertPrev = vAxisValue;
+						break;
+				}
 			}
+
+			//p1
+			//p1 square (left)
+			if (Input.GetKeyDown (KeyCode.Joystick1Button0))
+			{
+				TryEatFood (InputRow.Left, 0);
+			}
+
+			//p1 cross and triangle (center)
+			if (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Joystick1Button3))
+			{
+				TryEatFood (InputRow.Center, 0);
+			}
+
+			//p1 circle (right)
+			if (Input.GetKeyDown (KeyCode.Joystick1Button2))
+			{
+				TryEatFood (InputRow.Right, 0);
+			}
+
+
+
+			//p2
+			//p2 square (left)
+			if (Input.GetKeyDown (KeyCode.Joystick2Button0))
+			{
+				TryEatFood (InputRow.Left, 1);
+			}
+
+			//p2 cross and triangle (center)
+			if (Input.GetKeyDown (KeyCode.Joystick2Button1) || Input.GetKeyDown (KeyCode.Joystick2Button3))
+			{
+				TryEatFood (InputRow.Center, 1);
+			}
+
+			//p2 circle (right)
+			if (Input.GetKeyDown (KeyCode.Joystick2Button2))
+			{
+				TryEatFood (InputRow.Right, 1);
+			}
+
+
+
+			//p3
+			//p3 square (left)
+			if (Input.GetKeyDown (KeyCode.Joystick3Button0))
+			{
+				TryEatFood (InputRow.Left, 2);
+			}
+
+			//p3 cross and triangle (center)
+			if (Input.GetKeyDown (KeyCode.Joystick3Button1) || Input.GetKeyDown (KeyCode.Joystick3Button3))
+			{
+				TryEatFood (InputRow.Center, 2);
+			}
+
+			//p3 circle (right)
+			if (Input.GetKeyDown (KeyCode.Joystick3Button2))
+			{
+				TryEatFood (InputRow.Right, 2);
+			}
+
+
+
+			//p4
+			//p4 square (left)
+			if (Input.GetKeyDown (KeyCode.Joystick4Button0))
+			{
+				TryEatFood (InputRow.Left, 3);
+			}
+
+			//p4 cross and triangle (center)
+			if (Input.GetKeyDown (KeyCode.Joystick4Button1) || Input.GetKeyDown (KeyCode.Joystick4Button3))
+			{
+				TryEatFood (InputRow.Center, 3);
+			}
+
+			//p4 circle (right)
+			if (Input.GetKeyDown (KeyCode.Joystick4Button2))
+			{
+				TryEatFood (InputRow.Right, 3);
+			}
+
 		}
 
 		int GetInputValue (InputRow inputRow)
@@ -172,6 +310,9 @@ namespace Gobbler
 
 			int playerProg = playerProgress[playerIndex];
 
+			if (playerProg == foodSequenceLength)
+				return; //finished eating
+
 			int expectedValue = foodSequence[playerProg];
 
 			int inputValue = GetInputValue (inputRow);
@@ -184,7 +325,9 @@ namespace Gobbler
 				//play eating animation
 
 				//remove food from lane
-				Destroy (playerLanePositions[playerIndex].GetChild (0).gameObject);
+				Transform toRemove = playerLanePositions[playerIndex].GetChild (0);
+				toRemove.SetParent (null);
+				Destroy (toRemove.gameObject);
 			}
 			else
 			{
@@ -227,7 +370,10 @@ namespace Gobbler
 
 				if (lowestFood.transform.localPosition.y != 0)
 				{
-					lowestFood.transform.Translate (-Vector3.up * lowestFood.transform.localPosition.y * foodMoveSpeed * Time.deltaTime);
+					float newY = Mathf.MoveTowards (lowestFood.transform.localPosition.y, 0, foodMoveSpeed * Time.deltaTime);
+					Vector3 localPos = lowestFood.transform.localPosition;
+					localPos.y = newY;
+					lowestFood.transform.localPosition = localPos;
 				}
 
 				//foreach (Transform child in lane)
@@ -237,13 +383,11 @@ namespace Gobbler
 
 					if (child == lowestFood)
 						continue;
-
-					float heightDiff = lane.GetChild (j - 1).transform.localPosition.y + rowHeightOffset;
-
-					if (Mathf.Abs(heightDiff) > 0.05f)
-					{
-						child.transform.Translate (-Vector3.up * heightDiff * foodMoveSpeed * Time.deltaTime);
-					}
+						
+					float newY = Mathf.MoveTowards (child.localPosition.y, (lane.GetChild (j - 1).transform.localPosition.y + rowHeightOffset), foodMoveSpeed * Time.deltaTime);
+					Vector3 localPos = child.localPosition;
+					localPos.y = newY;
+					child.transform.localPosition = localPos;
 				}
 			}
 		}
