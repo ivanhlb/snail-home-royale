@@ -17,6 +17,13 @@ namespace Gobbler
 		[SerializeField] int differentFoods = 3;
 		[SerializeField] float stunDuration = 0.3f;
 
+		[SerializeField] float rowHeightOffset = 2;
+		[SerializeField] float laneOffset = 1.5f;
+		[SerializeField] Transform[] playerLanePositions;
+		[SerializeField] GameObject[] foodPrefabs;
+
+		GameManager gm;
+
 		int[] foodSequence;
 
 		int[] playerProgress = new int[4] { 0, 0, 0, 0 };
@@ -24,11 +31,17 @@ namespace Gobbler
 		bool[] playerStunned = new bool[4] { false, false, false, false };
 
 		Coroutine[] playerStunTimers = new Coroutine[4] { null, null, null, null };
-
+		
 		// Start is called before the first frame update
 		void Awake ()
 		{
+			gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 			GenerateFoodSequence ();
+		}
+
+		void Start ()
+		{
+			
 		}
 
 		// Update is called once per frame
@@ -49,9 +62,9 @@ namespace Gobbler
 			}
 		}
 
-		void GenerateFoodObjects ()
+		void GenerateFoodObjects (int playerIndex)
 		{
-		
+
 		}
 
 		void DetectInputs ()
