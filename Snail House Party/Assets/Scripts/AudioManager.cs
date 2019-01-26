@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource efxSource;                   
-    public AudioSource musicSource;                 
+    //AudioManager.instance.PlayRaceBgm(); //call this code in your program to play the sound
+
+    public AudioSource audios;
+    public AudioClip snailracebgm;
+    public AudioClip snailraceStart;
+    public AudioClip snailraceWalkone;
+    public AudioClip snailraceWalktwo;
+    public AudioClip snailraceWalkthree;
+    public AudioClip snailDeathOne;
+    public AudioClip snailDeathTwo;
     public static AudioManager instance = null;                  
 
 
@@ -26,10 +34,36 @@ public class AudioManager : MonoBehaviour
 
 
     //Used to play single sound clips.
-    public void PlaySingle()
+    public void PlayRaceBgm()
     {
+        audios.clip = snailracebgm;
         //Play the clip.
-        efxSource.Play();
+        audios.Play();
+    }
+
+    public void PlayRaceStart()
+    {
+        audios.PlayOneShot(snailraceStart);
+    }
+    public void PlayRaceWalkOne()
+    {
+        audios.PlayOneShot(snailraceWalkone);
+    }
+    public void PlayRaceWalkTwo()
+    {
+        audios.PlayOneShot(snailraceWalktwo);
+    }
+    public void PlayRaceWalkThree()
+    {
+        audios.PlayOneShot(snailraceWalkthree);
+    }
+    public void PlayDeathOne()
+    {
+        audios.PlayOneShot(snailDeathOne);
+    }
+    public void PlayDeathTwo()
+    {
+        audios.PlayOneShot(snailDeathTwo);
     }
 
 }
