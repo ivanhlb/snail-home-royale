@@ -17,6 +17,7 @@ public class bomb : MonoBehaviour
     public Double timetokill;
     public Double delay = 1;
     public float speed = 1.0f;
+    bool gameEnd = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +46,7 @@ public class bomb : MonoBehaviour
         if (target != null)
         {
             float step = speed * Time.deltaTime;
-            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3 (target.transform.position.x, this.transform.position.y, target.transform.position.z), step);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, step);
         }
 
         if (controller.playerplaying.Count > 1)
@@ -55,25 +56,29 @@ public class bomb : MonoBehaviour
         }
         else
         {
-            if (target.GetComponent<PlayerController_passthesalt>().playerid == 1)
+            if (target.GetComponent<PlayerController1>().playerid == 1 && gameEnd == false)
             {
                 gm.Addplayeronescore(1);
                 gm.loadnextgame();
+                gameEnd = true;
             }
-            if (target.GetComponent<PlayerController_passthesalt>().playerid == 2)
+            if (target.GetComponent<PlayerController1>().playerid == 2 && gameEnd == false)
             {
                 gm.Addplayertwoscore(1);
                 gm.loadnextgame();
+                gameEnd = true;
             }
-            if (target.GetComponent<PlayerController_passthesalt>().playerid == 3)
+            if (target.GetComponent<PlayerController1>().playerid == 3 && gameEnd == false)
             {
                 gm.Addplayerthreescore(1);
                 gm.loadnextgame();
+                gameEnd = true;
             }
-            if (target.GetComponent<PlayerController_passthesalt>().playerid == 4)
+            if (target.GetComponent<PlayerController1>().playerid == 4 && gameEnd == false)
             {
                 gm.Addplayerfourscore(1);
                 gm.loadnextgame();
+                gameEnd = true;
             }
         }
 
