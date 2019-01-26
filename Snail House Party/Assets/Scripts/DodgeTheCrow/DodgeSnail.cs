@@ -32,12 +32,10 @@ public class DodgeSnail : AnimatedSprite
         switch (playerIndex)
         {
             case PlayerIndex.PlayerOne:
-                personalButton = KeyCode.X;
-                //personalButton = KeyCode.Joystick1Button1;
+                personalButton = KeyCode.Joystick1Button1;
                 break;
             case PlayerIndex.PlayerTwo:
-                personalButton = KeyCode.LeftArrow;
-                //personalButton = KeyCode.Joystick2Button1;
+                personalButton = KeyCode.Joystick2Button1;
                 break;
             case PlayerIndex.PlayerThree:
                 personalButton = KeyCode.Joystick3Button1;
