@@ -22,6 +22,8 @@ namespace Gobbler
 		[SerializeField] Transform[] playerLanePositions;
 		[SerializeField] GameObject[] foodPrefabs;
 
+		[SerializeField] float foodMoveSpeed = 1;
+
 		GameManager gm;
 
 		int[] foodSequence;
@@ -31,7 +33,7 @@ namespace Gobbler
 		bool[] playerStunned = new bool[4] { false, false, false, false };
 
 		Coroutine[] playerStunTimers = new Coroutine[4] { null, null, null, null };
-		
+
 		// Start is called before the first frame update
 		void Awake ()
 		{
@@ -41,13 +43,21 @@ namespace Gobbler
 
 		void Start ()
 		{
-			
+			if (gm.playerone)
+				GenerateFoodObjects (0);
+			if (gm.playertwo)
+				GenerateFoodObjects (1);
+			if (gm.playerthree)
+				GenerateFoodObjects (2);
+			if (gm.playerfour)
+				GenerateFoodObjects (3);
 		}
 
 		// Update is called once per frame
 		void Update ()
 		{
 			DetectInputs ();
+			//MoveFood ();
 		}
 
 		void GenerateFoodSequence ()
@@ -64,7 +74,31 @@ namespace Gobbler
 
 		void GenerateFoodObjects (int playerIndex)
 		{
+			Transform lane = playerLanePositions[playerIndex];
+			float yOffset = 0;
 
+			for (int i = 0; i < foodSequenceLength; i++)
+			{
+				int foodIndex = foodSequence[i];
+				GameObject foodObject = Instantiate (foodPrefabs[foodIndex], lane);
+
+				foodObject.transform.Translate (Vector3.up * yOffset);
+
+				InputRow inputRow = (InputRow)foodIndex;
+				switch (inputRow)
+				{
+					case InputRow.Left:
+						foodObject.transform.Translate (-Vector3.right * laneOffset);
+						break;
+					case InputRow.Right:
+						foodObject.transform.Translate (Vector3.right * laneOffset);
+						break;
+					case InputRow.Center:
+						break;
+				}
+
+				yOffset += rowHeightOffset;
+			}
 		}
 
 		void DetectInputs ()
@@ -80,12 +114,15 @@ namespace Gobbler
 
 				if (i != 0)
 				{
-					hCheckedAxis += i.ToString ();
-					vCheckedAxis += i.ToString ();
+					hCheckedAxis += (i + 1).ToString ();
+					vCheckedAxis += (i + 1).ToString ();
 				}
 
 				float hAxisValue = Input.GetAxisRaw (hCheckedAxis);
 				float vAxisValue = Input.GetAxisRaw (vCheckedAxis);
+
+				Debug.Log (hCheckedAxis + " " + hAxisValue);
+				Debug.Log (vCheckedAxis + " " + vAxisValue);
 
 				if (hAxisValue != 0)
 				{
@@ -145,6 +182,9 @@ namespace Gobbler
 				playerProgress[playerIndex]++;
 
 				//play eating animation
+
+				//remove food from lane
+				Destroy (playerLanePositions[playerIndex].GetChild (0).gameObject);
 			}
 			else
 			{
@@ -160,6 +200,7 @@ namespace Gobbler
 				stunTimer = StartCoroutine (UnstunPlayer (playerIndex));
 
 				//play stun animation
+				Debug.Log ("stunned");
 			}
 		}
 
@@ -170,7 +211,41 @@ namespace Gobbler
 			playerStunTimers[playerIndex] = null;
 
 			//stop stun animation
-			
+
+		}
+
+		void MoveFood ()
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				Transform lane = playerLanePositions[i];
+
+				if (lane.childCount == 0)
+					continue;
+
+				Transform lowestFood = lane.GetChild (0);
+
+				if (lowestFood.transform.localPosition.y != 0)
+				{
+					lowestFood.transform.Translate (-Vector3.up * lowestFood.transform.localPosition.y * foodMoveSpeed * Time.deltaTime);
+				}
+
+				//foreach (Transform child in lane)
+				for (int j = 0; j < lane.childCount; j++)
+				{
+					Transform child = lane.GetChild (j);
+
+					if (child == lowestFood)
+						continue;
+
+					float heightDiff = lane.GetChild (j - 1).transform.localPosition.y + rowHeightOffset;
+
+					if (Mathf.Abs(heightDiff) > 0.05f)
+					{
+						child.transform.Translate (-Vector3.up * heightDiff * foodMoveSpeed * Time.deltaTime);
+					}
+				}
+			}
 		}
 	}
 }
