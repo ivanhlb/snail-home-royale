@@ -18,6 +18,7 @@ namespace SnailPace
         public PlayerController playerthree;
         public PlayerController playerfour;
         public GameObject startPos, endPos;
+        public CountdownManager countdownManager;
         // Start is called before the first frame update
         void Start()
         {
@@ -29,6 +30,7 @@ namespace SnailPace
                 //playerone.GetComponent<MeshRenderer>().material.color = Color.red;
                 playerone.startPos = startPos;
                 playerone.endPos = endPos;
+                playerone.countdownManager = countdownManager;
             }
 
             if (gm.playertwo)
@@ -37,6 +39,7 @@ namespace SnailPace
                 //playertwo.GetComponent<MeshRenderer>().material.color = Color.yellow;
                 playertwo.startPos = startPos;
                 playertwo.endPos = endPos;
+                playertwo.countdownManager = countdownManager;
             }
 
             if (gm.playerthree)
@@ -45,6 +48,7 @@ namespace SnailPace
                 //playerthree.GetComponent<MeshRenderer>().material.color = Color.blue;
                 playerthree.startPos = startPos;
                 playerthree.endPos = endPos;
+                playerthree.countdownManager = countdownManager;
             }
 
             if (gm.playerfour)
@@ -53,6 +57,7 @@ namespace SnailPace
                 //playerfour.GetComponent<MeshRenderer>().material.color = Color.green;
                 playerfour.startPos = startPos;
                 playerfour.endPos = endPos;
+                playerfour.countdownManager = countdownManager;
             }
         }
 
