@@ -17,6 +17,8 @@ namespace Gobbler
 		[SerializeField] int differentFoods = 3;
 		[SerializeField] float stunDuration = 0.3f;
 
+		[SerializeField] GameObject[] foodPrefabs;
+
 		int[] foodSequence;
 
 		int[] playerProgress = new int[4] { 0, 0, 0, 0 };
@@ -24,7 +26,7 @@ namespace Gobbler
 		bool[] playerStunned = new bool[4] { false, false, false, false };
 
 		Coroutine[] playerStunTimers = new Coroutine[4] { null, null, null, null };
-
+		
 		// Start is called before the first frame update
 		void Awake ()
 		{
