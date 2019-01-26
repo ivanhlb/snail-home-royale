@@ -9,7 +9,7 @@ public class PlayerController1 : MonoBehaviour
     private Rigidbody2D rb2d;
     GameManager gm;
     bomb bm;
-
+    public GameObject[] shell;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,106 @@ public class PlayerController1 : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         bm = GameObject.FindGameObjectWithTag("bomb").GetComponent<bomb>();
+        if (playerid == 1)
+        {
+            if (gm.playeronescore <= 0)
+            {
+                shell[0].SetActive(true);
+            }
+            else if (gm.playeronescore == 1)
+            {
+                shell[1].SetActive(true);
+            }
+            else if (gm.playeronescore == 2)
+            {
+                shell[2].SetActive(true);
+            }
+            else if (gm.playeronescore == 3)
+            {
+                shell[2].SetActive(true);
+                shell[3].SetActive(true);
+            }
+            else if (gm.playeronescore == 4)
+            {
+                shell[2].SetActive(true);
+                shell[4].SetActive(true);
+            }
+        }
+        if (playerid == 2)
+        {
+            if (gm.playertwoscore <= 0)
+            {
+                shell[0].SetActive(true);
+            }
+            else if (gm.playertwoscore == 1)
+            {
+                shell[1].SetActive(true);
+            }
+            else if (gm.playertwoscore == 2)
+            {
+                shell[2].SetActive(true);
+            }
+            else if (gm.playertwoscore == 3)
+            {
+                shell[2].SetActive(true);
+                shell[3].SetActive(true);
+            }
+            else if (gm.playertwoscore == 4)
+            {
+                shell[2].SetActive(true);
+                shell[4].SetActive(true);
+            }
+        }
+        if (playerid == 3)
+        {
+            if (gm.playerthreescore <= 0)
+            {
+                shell[0].SetActive(true);
+            }
+            else if (gm.playerthreescore == 1)
+            {
+                shell[1].SetActive(true);
+            }
+            else if (gm.playerthreescore == 2)
+            {
+                shell[2].SetActive(true);
+            }
+            else if (gm.playerthreescore == 3)
+            {
+                shell[2].SetActive(true);
+                shell[3].SetActive(true);
+            }
+            else if (gm.playerthreescore == 4)
+            {
+                shell[2].SetActive(true);
+                shell[4].SetActive(true);
+            }
+        }
+        if (playerid == 4)
+        {
+            if (gm.playerfourscore <= 0)
+            {
+                shell[0].SetActive(true);
+            }
+            else if (gm.playerfourscore == 1)
+            {
+                shell[1].SetActive(true);
+            }
+            else if (gm.playerfourscore == 2)
+            {
+                shell[2].SetActive(true);
+            }
+            else if (gm.playerfourscore == 3)
+            {
+                shell[2].SetActive(true);
+                shell[3].SetActive(true);
+            }
+            else if (gm.playerfourscore == 4)
+            {
+                shell[2].SetActive(true);
+                shell[4].SetActive(true);
+            }
+        }
     }
 
     // Update is called once per frame
