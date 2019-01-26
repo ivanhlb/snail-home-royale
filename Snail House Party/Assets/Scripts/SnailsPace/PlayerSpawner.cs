@@ -25,25 +25,25 @@ namespace SnailPace
             if (gm.playerone)
             {
                 playerone = Instantiate(playeronePrefab, new Vector3(-12, 8.5f,0), Quaternion.identity);
-                playerone.GetComponent<MeshRenderer>().material.color = Color.red;
+                //playerone.GetComponent<MeshRenderer>().material.color = Color.red;
             }
 
             if (gm.playertwo)
             {
                 playertwo = Instantiate(playertwoPrefab, new Vector3(-12, 3, 0), Quaternion.identity);
-                playertwo.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                //playertwo.GetComponent<MeshRenderer>().material.color = Color.yellow;
             }
 
             if (gm.playerthree)
             {
                 playerthree = Instantiate(playerthreePrefab, new Vector3(-12, -3, 0), Quaternion.identity);
-                playerthree.GetComponent<MeshRenderer>().material.color = Color.blue;
+                //playerthree.GetComponent<MeshRenderer>().material.color = Color.blue;
             }
 
             if (gm.playerfour)
             {
                 playerfour = Instantiate(playerfourPrefab, new Vector3(-12, -8.5f, 0), Quaternion.identity);
-                playerfour.GetComponent<MeshRenderer>().material.color = Color.green;
+                //playerfour.GetComponent<MeshRenderer>().material.color = Color.green;
             }
         }
 
