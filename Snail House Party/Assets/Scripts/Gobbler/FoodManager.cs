@@ -41,6 +41,14 @@ namespace Gobbler
 
 		[SerializeField] float playerVerticalOffset = -0.3f;
 
+		[SerializeField] GameObject helpScreen;
+		bool ready = false;
+
+		bool p1Ready = false;
+		bool p2Ready = false;
+		bool p3Ready = false;
+		bool p4Ready = false;
+
 		float p1HorPrev;
 		float p1VertPrev;
 
@@ -58,10 +66,29 @@ namespace Gobbler
 		{
 			gm = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 			GenerateFoodSequence ();
-			CreatePlayers ();
 		}
 
 		void Start ()
+		{
+
+		}
+
+		// Update is called once per frame
+		void Update ()
+		{
+			if (!ready)
+			{
+				SetReady ();
+				CheckReady ();
+			}
+			else
+			{
+				DetectInputs ();
+				MoveFood ();
+			}
+		}
+
+		void Initialise ()
 		{
 			if (gm.playerone)
 				GenerateFoodObjects (0);
@@ -73,11 +100,74 @@ namespace Gobbler
 				GenerateFoodObjects (3);
 		}
 
-		// Update is called once per frame
-		void Update ()
+		void SetReady ()
 		{
-			DetectInputs ();
-			MoveFood ();
+			if (gm.playerone)
+			{
+				if (Input.GetKeyDown (KeyCode.Joystick1Button1))
+					p1Ready = true;
+			}
+
+			if (gm.playertwo)
+			{
+				if (Input.GetKeyDown (KeyCode.Joystick2Button1))
+					p2Ready = true;
+			}
+
+			if (gm.playerthree)
+			{
+				if (Input.GetKeyDown (KeyCode.Joystick3Button1))
+					p3Ready = true;
+			}
+
+			if (gm.playerfour)
+			{
+				if (Input.GetKeyDown (KeyCode.Joystick4Button1))
+					p4Ready = true;
+			}
+
+		}
+
+		void CheckReady ()
+		{
+			int reqCount = 0;
+			int readyCount = 0;
+			if (gm.playerone)
+			{
+				reqCount++;
+				if (p1Ready)
+					readyCount++;
+			}
+
+			if (gm.playertwo)
+			{
+				reqCount++;
+				if (p2Ready)
+					readyCount++;
+			}
+
+			if (gm.playerthree)
+			{
+				reqCount++;
+				if (p3Ready)
+					readyCount++;
+			}
+
+			if (gm.playerfour)
+			{
+				reqCount++;
+				if (p4Ready)
+					readyCount++;
+			}
+
+			if (readyCount >= reqCount)
+			{
+				ready = true;
+				helpScreen.SetActive (false);
+
+				CreatePlayers ();
+				Initialise ();
+			}
 		}
 
 		void GenerateFoodSequence ()
@@ -138,6 +228,9 @@ namespace Gobbler
 			//position players
 			for (int i = 0; i < 4; i++)
 			{
+				if (playerControllers[i] == null)
+					continue;
+
 				Vector3 playerPos = playerLanePositions[i].transform.position;
 				playerPos.y += playerVerticalOffset;
 				playerControllers[i].transform.position = playerPos;
@@ -415,7 +508,6 @@ namespace Gobbler
 
 				//play stun animation
 				playerControllers[playerIndex].GetStunned ();
-				Debug.Log ("stunned");
 			}
 		}
 
