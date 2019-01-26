@@ -11,21 +11,24 @@ public class bomb : MonoBehaviour
     [SerializeField]
     GameObject playercontroller;
     PlayerSpawner_passthesalt controller;
+    GameManager gm;
 
     public GameObject target;
     public Double timetokill;
+    public Double delay = 1;
     public float speed = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
        controller = playercontroller.GetComponent<PlayerSpawner_passthesalt>();
+       gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+        delay = delay - Time.deltaTime;
 
         if (timetokill <= 0)
         {
@@ -36,7 +39,7 @@ public class bomb : MonoBehaviour
             }
             int randomtarget = UnityEngine.Random.Range(0, controller.playerplaying.Count - 1);
             target = controller.playerplaying[randomtarget];
-            timetokill = 5;
+            timetokill = 50;
         }
 
         if (target != null)
@@ -49,6 +52,29 @@ public class bomb : MonoBehaviour
         {
             timer.text = Math.Round(timetokill, 0).ToString();
             timetokill = timetokill - Time.deltaTime;
+        }
+        else
+        {
+            if (target.GetComponent<PlayerController_passthesalt>().playerid == 1)
+            {
+                gm.Addplayeronescore(1);
+                gm.loadnextgame();
+            }
+            if (target.GetComponent<PlayerController_passthesalt>().playerid == 2)
+            {
+                gm.Addplayertwoscore(1);
+                gm.loadnextgame();
+            }
+            if (target.GetComponent<PlayerController_passthesalt>().playerid == 3)
+            {
+                gm.Addplayerthreescore(1);
+                gm.loadnextgame();
+            }
+            if (target.GetComponent<PlayerController_passthesalt>().playerid == 4)
+            {
+                gm.Addplayerfourscore(1);
+                gm.loadnextgame();
+            }
         }
 
         
