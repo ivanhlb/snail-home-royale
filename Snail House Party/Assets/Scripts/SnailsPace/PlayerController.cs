@@ -8,7 +8,9 @@ namespace SnailPace
     public class PlayerController : MonoBehaviour
     {
         GameManager gm;
+        
         public GameObject startPos, endPos;
+        public CountdownManager countdownManager;
         int buttonMash = 0, comboMeter = 0, idle_delay = 10, idle_counter = 0, boost_multiplier = 5;
         string prevButton, joystick;
         float pace = 0.0f, boost = 0.0f, fade = 0.2f;
@@ -26,6 +28,10 @@ namespace SnailPace
         // Update is called once per frame
         void Update()
         {
+            if (!countdownManager.gameStart){
+                return;
+            }
+
             idle_counter--;
             if (idle_counter == 0)
             {
