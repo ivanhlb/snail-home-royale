@@ -14,6 +14,7 @@ public class bomb : MonoBehaviour
 
     public GameObject target;
     public Double timetokill;
+    public Double delay = 1;
     public float speed = 1.0f;
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class bomb : MonoBehaviour
     void Update()
     {
 
-        
+        delay = delay - Time.deltaTime;
 
         if (timetokill <= 0)
         {
@@ -36,7 +37,7 @@ public class bomb : MonoBehaviour
             }
             int randomtarget = UnityEngine.Random.Range(0, controller.playerplaying.Count - 1);
             target = controller.playerplaying[randomtarget];
-            timetokill = 5;
+            timetokill = 50;
         }
 
         if (target != null)
