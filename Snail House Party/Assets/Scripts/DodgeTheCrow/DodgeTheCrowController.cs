@@ -73,31 +73,8 @@ public class DodgeTheCrowController : MonoBehaviour
             snails.Add(PlayerIndex.PlayerOne, d[0]);
             d[0].Init(PlayerIndex.PlayerOne);
         }
-        //line them up.
-        LineUp();
     }
-    private void LineUp()
-    {
-        int padding = 2;
-        Vector3 pointA = startingLine.GetPosition(0);
-        pointA.x -= 1;
-        Vector3 pointB = startingLine.GetPosition(1);
-        pointB.x -= 1;
-        Vector3 currPos = pointA;
-
-        float disSpread = (Vector3.Distance(pointA, pointB) - padding) / (snails.Count + 1);
-        Dictionary<PlayerIndex, DodgeSnail>.ValueCollection values = snails.Values;
-
-        foreach (DodgeSnail s in values)
-        {
-            currPos.y += disSpread;
-            s.transform.position = currPos;
-        }
-        if (debug)
-        {
-            OnReady(PlayerIndex.PlayerOne);      
-        }
-    }
+    
     IEnumerator CountDownCorountine()
     {
         WaitForSecondsRealtime waitOneSec = new WaitForSecondsRealtime(1f);
@@ -110,6 +87,7 @@ public class DodgeTheCrowController : MonoBehaviour
         //start game officially.
         countdownText.gameObject.SetActive(false);
         gameStarted = true;
+        Crow.instance.Init();
         yield return null;
     }
 }

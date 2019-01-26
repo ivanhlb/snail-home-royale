@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 /// <summary>
 /// snail controller for dodge the crow minigame.
 /// </summary>
@@ -11,6 +12,8 @@ public enum PlayerIndex
 }
 public class DodgeSnail : AnimatedSprite
 {
+    [HideInInspector]
+    public Vector3 startPos;
     private KeyCode personalButton;
     private Vector3 newPos;
     private int animParamHash;
@@ -18,11 +21,12 @@ public class DodgeSnail : AnimatedSprite
     public bool isMoving { get; private set; }
     public PlayerIndex playerIndex { get; private set; }
     public bool ready { get; private set; }
+
     
     public void Init(PlayerIndex index)
     {
         AnimatorControllerParameter[] test = animator.parameters;
-        animParamHash = System.Array.Find(test, x => { return x.name == "IsMoving"; }).nameHash;
+        animParamHash = Array.Find(test, x => { return x.name == "IsMoving"; }).nameHash;
         playerIndex = index;
         switch (playerIndex)
         {
@@ -44,6 +48,12 @@ public class DodgeSnail : AnimatedSprite
         sp.enabled = true;
         isInit = true;
     }
+
+    internal void resetPosition()
+    {
+        sp.enabled = false;
+    }
+
     private void Update()
     {
         if (!isInit)
@@ -58,11 +68,14 @@ public class DodgeSnail : AnimatedSprite
             else if (DodgeTheCrowController.instance.gameStarted)
             {
                 isMoving = true;
-                //move
                 newPos = transform.position;
                 newPos.x += 0.2f;
                 transform.position = Vector3.MoveTowards(transform.position, newPos, 0.05f);
                 animator.SetBool(animParamHash, true);
+                if(Crow.instance)
+                {
+                    Crow.instance.OnSnailMoved(this);
+                }
             }
         }
         else

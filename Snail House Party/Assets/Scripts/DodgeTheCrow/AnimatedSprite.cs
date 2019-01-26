@@ -7,7 +7,7 @@ public class AnimatedSprite : MonoBehaviour
 {
     protected SpriteRenderer sp;
     protected Animator animator;
-    protected void Awake()
+    protected virtual void Awake()
     {
         sp = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
