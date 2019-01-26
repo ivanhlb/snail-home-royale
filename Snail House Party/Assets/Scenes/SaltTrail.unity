@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 636517760}
   - component: {fileID: 636517759}
   - component: {fileID: 636517763}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -817418469
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c27f2f0fb24d9f741ae11f241e9cc148, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 1490058250}
   - component: {fileID: 1490058249}
   - component: {fileID: 1490058253}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: player4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -817418469
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9b89243cbc0e7e04aa4babcfb05d3e9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 1661468714}
   - component: {fileID: 1661468713}
   - component: {fileID: 1661468717}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -817418469
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7adbde3bceb60c048941d281c880eac2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 1947215259}
   - component: {fileID: 1947215258}
   - component: {fileID: 1947215260}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 2117673715}
   - component: {fileID: 2117673714}
   - component: {fileID: 2117673718}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,7 +789,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -817418469
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 439af5015f9e74348b5014be50326810, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

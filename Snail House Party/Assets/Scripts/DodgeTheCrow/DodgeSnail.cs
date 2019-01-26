@@ -52,9 +52,9 @@ public class DodgeSnail : AnimatedSprite
 
     private void Update()
     {
-        if (!isInit)
+        if (!isInit || DodgeTheCrowController.instance.gameWon)
             return;
-        if (Input.GetKeyUp(personalButton))
+        if (Input.GetKeyDown(personalButton))
         {
             if (DodgeTheCrowController.instance.inInstructions)
             {
