@@ -25,7 +25,7 @@ namespace SnailPace
 
             if (gm.playerone)
             {
-                playerone = Instantiate(playeronePrefab, new Vector3(-12, 8.5f,0), Quaternion.identity).GetComponent<PlayerController>();
+                playerone = Instantiate(playeronePrefab, new Vector3(-14, 4,0), Quaternion.identity).GetComponent<PlayerController>();
                 //playerone.GetComponent<MeshRenderer>().material.color = Color.red;
                 playerone.startPos = startPos;
                 playerone.endPos = endPos;
@@ -33,7 +33,7 @@ namespace SnailPace
 
             if (gm.playertwo)
             {
-                playertwo = Instantiate(playertwoPrefab, new Vector3(-12, 3, 0), Quaternion.identity).GetComponent<PlayerController>();
+                playertwo = Instantiate(playertwoPrefab, new Vector3(-14, 0, 0), Quaternion.identity).GetComponent<PlayerController>();
                 //playertwo.GetComponent<MeshRenderer>().material.color = Color.yellow;
                 playertwo.startPos = startPos;
                 playertwo.endPos = endPos;
@@ -41,7 +41,7 @@ namespace SnailPace
 
             if (gm.playerthree)
             {
-                playerthree = Instantiate(playerthreePrefab, new Vector3(-12, -3, 0), Quaternion.identity).GetComponent<PlayerController>();
+                playerthree = Instantiate(playerthreePrefab, new Vector3(-14, -4, 0), Quaternion.identity).GetComponent<PlayerController>();
                 //playerthree.GetComponent<MeshRenderer>().material.color = Color.blue;
                 playerthree.startPos = startPos;
                 playerthree.endPos = endPos;
@@ -49,7 +49,7 @@ namespace SnailPace
 
             if (gm.playerfour)
             {
-                playerfour = Instantiate(playerfourPrefab, new Vector3(-12, -8.5f, 0), Quaternion.identity).GetComponent<PlayerController>();
+                playerfour = Instantiate(playerfourPrefab, new Vector3(-14, -8, 0), Quaternion.identity).GetComponent<PlayerController>();
                 //playerfour.GetComponent<MeshRenderer>().material.color = Color.green;
                 playerfour.startPos = startPos;
                 playerfour.endPos = endPos;

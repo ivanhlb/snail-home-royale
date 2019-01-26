@@ -74,7 +74,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 2.56, y: 2.55}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,8 +102,7 @@ Animator:
 --- !u!1 &3458221623306382197
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5336998741943529199, guid: adaf621ca8f21d344ba16e39ddf57ede,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -123,8 +122,7 @@ GameObject:
 --- !u!4 &3458221623306382222
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5336998741943528980, guid: adaf621ca8f21d344ba16e39ddf57ede,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458221623306382197}
@@ -139,8 +137,7 @@ Transform:
 --- !u!33 &3458221623306382193
 MeshFilter:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5336998741943529195, guid: adaf621ca8f21d344ba16e39ddf57ede,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458221623306382197}
@@ -148,8 +145,7 @@ MeshFilter:
 --- !u!23 &3458221623306382192
 MeshRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5336998741943529194, guid: adaf621ca8f21d344ba16e39ddf57ede,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458221623306382197}
@@ -186,8 +182,7 @@ MeshRenderer:
 --- !u!65 &3458221623306382195
 BoxCollider:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5336998741943529193, guid: adaf621ca8f21d344ba16e39ddf57ede,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458221623306382197}
@@ -200,8 +195,7 @@ BoxCollider:
 --- !u!114 &3458221623306382194
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5336998741943529192, guid: adaf621ca8f21d344ba16e39ddf57ede,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458221623306382197}
@@ -210,5 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d798e88c1d95204ca5ad01d22eea654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPos: {fileID: 0}
+  endPos: {fileID: 0}
   playerid: 1
+  winCounter: 100
   animator: {fileID: 6651727889504073786}
