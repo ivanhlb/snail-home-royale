@@ -8,12 +8,14 @@ namespace SnailPace
     public class PlayerController : MonoBehaviour
     {
         GameManager gm;
+
         public GameObject[] shell;
         public GameObject startPos, endPos;
         public CountdownManager countdownManager;
         int buttonMash = 0, comboMeter = 0, idle_delay = 10, idle_counter = 0, boost_multiplier = 5;
         string prevButton, joystick;
         float pace = 0.0f, boost = 0.0f, fade = 0.2f;
+        bool isFinished = false;
         public int playerid, winCounter = 100;
         [SerializeField] private Animator animator;
         // Start is called before the first frame update
@@ -128,7 +130,12 @@ namespace SnailPace
         // Update is called once per frame
         void Update()
         {
-            if (!countdownManager.gameStart){
+            if (!countdownManager.gameStart)
+            {
+                return;
+            }
+            if (isFinished)
+            {
                 return;
             }
 
@@ -158,7 +165,7 @@ namespace SnailPace
                         break;
                 }
                 gm.loadnextgame();
-                return;
+                isFinished = true;
             }
 
             //button mash calculation
