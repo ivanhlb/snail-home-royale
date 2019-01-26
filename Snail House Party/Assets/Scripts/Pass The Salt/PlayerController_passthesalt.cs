@@ -6,8 +6,8 @@ public class PlayerController_passthesalt : MonoBehaviour
 {
     GameManager gm;
     Rigidbody rb;
-    [SerializeField]
-    int playerid;
+    
+    public int playerid;
     bomb bm;
     public int speed;
     // Start is called before the first frame update

@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
     public bool playerthree = false;
     public bool playerfour = false;
 
-    int playeronescore;
-    int playertwoscore;
-    int playerthreescore;
-    int playerfourscore;
+    public int playeronescore;
+    public int playertwoscore;
+    public int playerthreescore;
+    public int playerfourscore;
 
 	Coroutine scoreScreenCoroutine;
 
