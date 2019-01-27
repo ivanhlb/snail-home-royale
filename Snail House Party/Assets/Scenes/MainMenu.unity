@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -213,6 +213,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audios: {fileID: 251211110}
   snailracebgm: {fileID: 8300000, guid: e99eec7db4ffa25419cc11c86027fcb2, type: 3}
+  startbgm: {fileID: 8300000, guid: a50c7930f7f14804d883e578f227f4de, type: 3}
+  gobblerbgm: {fileID: 8300000, guid: 8b0e15c4bdc92b14f85148c896f515bc, type: 3}
+  dodgethecrowbgm: {fileID: 8300000, guid: 06fe99e9d74f2ee40b86593f4e87f651, type: 3}
+  passthesaltbgm: {fileID: 8300000, guid: 43c30805fe8a68144b8e9d05ee02d5b5, type: 3}
   snailraceStart: {fileID: 8300000, guid: fb1e1b0c826a0fa4490d085aaf0405f5, type: 3}
   snailraceWalkone: {fileID: 8300000, guid: bf1bacacf7b47c644b1f3ea1b3e520b3, type: 3}
   snailraceWalktwo: {fileID: 8300000, guid: 72e64d4cd997af04fa3becffc681f68c, type: 3}
@@ -223,7 +227,13 @@ MonoBehaviour:
   LevelComplete: {fileID: 8300000, guid: 09a3fa0b398d6604d8d0b4ccfb81109f, type: 3}
   GameComplete: {fileID: 8300000, guid: 4286315463abece42a56e68080586d7b, type: 3}
   Munching: {fileID: 8300000, guid: 0a93a2051a1e0974c88a0cc2aaa171ff, type: 3}
-  PlayerJoin: {fileID: 8300000, guid: ad87438186ae7204e88342b396fb608f, type: 3}
+  MunchWrong: {fileID: 8300000, guid: af49faf406b8aff489ce7d7d1ea61f01, type: 3}
+  PlayerJoin: {fileID: 8300000, guid: e663cb5cfe7a61844b2261ca8c062cad, type: 3}
+  SaltShaker: {fileID: 8300000, guid: 366a67ed317e05a4ba5c572332cbcb72, type: 3}
+  CrowCaw: {fileID: 8300000, guid: a4cfabd313c649047a68420130ff2403, type: 3}
+  CrowAlert: {fileID: 8300000, guid: b7d54d9ae52631e4aa96c36f87d0413f, type: 3}
+  CrowAttack: {fileID: 0}
+  SnailHurt: {fileID: 8300000, guid: bf6d6df4c0d93d24097904a6953b319d, type: 3}
 --- !u!4 &251211109
 Transform:
   m_ObjectHideFlags: 0

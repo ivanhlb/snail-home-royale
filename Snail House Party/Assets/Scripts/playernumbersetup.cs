@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class playernumbersetup : MonoBehaviour
 {
     GameManager gm;
-    
+
     public Image playerone;
     public Image playertwo;
     public Image playerthree;

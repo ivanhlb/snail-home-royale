@@ -11,12 +11,6 @@ public class Crow : AnimatedSprite
 #pragma warning disable 0649
     [SerializeField]
     private Text indicator;
-    [SerializeField]
-    private AudioSource audiosource;
-    [SerializeField]
-    private AudioClip SquakAudio;
-    [SerializeField]
-    private AudioClip AttackAudio;
 #pragma warning restore 0649
 
     private int attackHash, idleHash, turnHash;
@@ -51,13 +45,14 @@ public class Crow : AnimatedSprite
     }
     public void Alert()
     {
+        AudioManager.instance.PlayCrowAlert();
         indicator.text = "!";
         isAlert = true;
         indicator.color = Color.red;
     }
     private void AttackSnail(DodgeSnail snail)
     {
-        audiosource.clip = AttackAudio;
+        AudioManager.instance.PlayCrowAttack();   
         animator.CrossFade(attackHash, 0.1f);
         sp.flipX = true;
         alertTimeLeft = 1.5f;
@@ -82,19 +77,16 @@ public class Crow : AnimatedSprite
     }
     IEnumerator PlaySquaksCoroutine()
     {
-        waittoTurnTimer = Random.Range(2, 7);
+        WaitForSecondsRealtime oneSecond = new WaitForSecondsRealtime(1);
+        waittoTurnTimer = Random.Range(0, 3);
         while (enabled)
         {
-            if (audiosource.clip == SquakAudio)
+            AudioManager.instance.PlayCrowCaw();
+            yield return oneSecond;
+            if (--waittoTurnTimer == 0)
             {
-                audiosource.Play();
-                yield return new WaitForSecondsRealtime(audiosource.clip.length);
-                if (--waittoTurnTimer == 0)
-                {
-                    animator.CrossFade(turnHash, 0.2f);
-                }
+                animator.CrossFade(turnHash, 0.2f);
             }
-            else yield return null;
         }
         yield return null;
     }
@@ -123,20 +115,37 @@ public class Crow : AnimatedSprite
     {
         Vector3 destination = snail.transform.position;
         snail.spriteRenderer.enabled = false;
+        snail.deco.enabled = false;
+        snail.shell.enabled = false;
         while (Vector3.SqrMagnitude(transform.position - destination) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, destination, 0.5f);
             yield return null;
         }
+        float rng = Random.value;
+        if (rng < 0.33f)
+        {
+            AudioManager.instance.PlayDeathOne();
+        }
+        else if (rng < 0.66f)
+        {
+            AudioManager.instance.PlayDeathTwo();
+        }
+        else
+        {
+            AudioManager.instance.PlayDeathThree();
+        }
+
         snail.transform.position = snail.startPos;
         snail.spriteRenderer.enabled = true;
+        snail.deco.enabled = true;
+        snail.shell.enabled = true;
         while (Vector3.SqrMagnitude(transform.position - origPos) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, origPos, 0.5f);
             yield return null;
         }
         //done catching.
-        audiosource.clip = SquakAudio;
         yield return swoop = null;
     }
 }

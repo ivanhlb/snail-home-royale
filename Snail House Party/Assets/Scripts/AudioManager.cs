@@ -8,6 +8,10 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource audios;
     public AudioClip snailracebgm;
+    public AudioClip startbgm;
+    public AudioClip gobblerbgm;
+    public AudioClip dodgethecrowbgm;
+    public AudioClip passthesaltbgm;
     public AudioClip snailraceStart;
     public AudioClip snailraceWalkone;
     public AudioClip snailraceWalktwo;
@@ -18,7 +22,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip LevelComplete;
     public AudioClip GameComplete;
     public AudioClip Munching;
+    public AudioClip MunchWrong;
     public AudioClip PlayerJoin;
+    public AudioClip SaltShaker;
+    public AudioClip CrowCaw;
+    public AudioClip CrowAlert;
+    public AudioClip CrowAttack;
+    public AudioClip SnailHurt;
     public static AudioManager instance = null;                  
 
 
@@ -42,6 +52,30 @@ public class AudioManager : MonoBehaviour
     public void PlayRaceBgm()
     {
         audios.clip = snailracebgm;
+        //Play the clip.
+        audios.Play();
+    }
+    public void PlayStartBgm()
+    {
+        audios.clip = startbgm;
+        //Play the clip.
+        audios.Play();
+    }
+    public void PlayGobblerBgm()
+    {
+        audios.clip = gobblerbgm;
+        //Play the clip.
+        audios.Play();
+    }
+    public void PlaySaltBgm()
+    {
+        audios.clip = passthesaltbgm;
+        //Play the clip.
+        audios.Play();
+    }
+    public void PlayBirbBgm()
+    {
+        audios.clip = dodgethecrowbgm;
         //Play the clip.
         audios.Play();
     }
@@ -89,5 +123,29 @@ public class AudioManager : MonoBehaviour
     public void PlayPlayerJoin()
     {
         audios.PlayOneShot(PlayerJoin);
+    }
+    public void PlaySaltShaker()
+    {
+        audios.PlayOneShot(SaltShaker);
+    }
+    public void PlayCrowCaw()
+    {
+        audios.PlayOneShot(CrowCaw);
+    }
+    public void PlayCrowAlert()
+    {
+        audios.PlayOneShot(CrowAlert);
+    }
+    public void PlayCrowAttack()
+    {
+        audios.PlayOneShot(CrowAttack);
+    }
+    public void PlaySnailHurt()
+    {
+        audios.PlayOneShot(SnailHurt);
+    }
+    public void PlayMunchWrong()
+    {
+        audios.PlayOneShot(MunchWrong);
     }
 }
