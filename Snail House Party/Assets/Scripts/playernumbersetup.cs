@@ -12,6 +12,10 @@ public class playernumbersetup : MonoBehaviour
     public Image playertwo;
     public Image playerthree;
     public Image playerfour;
+    public Image playeroneimg;
+    public Image playertwoimg;
+    public Image playerthreeimg;
+    public Image playerfourimg;
     public Image playeronebutton;
     public Image playertwobutton;
     public Image playerthreebutton;
@@ -29,45 +33,45 @@ public class playernumbersetup : MonoBehaviour
     {
         if (gm.playerone)
         {
-            playerone.color = Color.white;
+            playeroneimg.enabled = true;
             playeronebutton.enabled = false;
         }
         else
         {
-            playerone.color = Color.red;
+            playeroneimg.enabled = false;
             playeronebutton.enabled = true;
         }
 
         if (gm.playertwo)
         {
-            playertwo.color = Color.white;
+            playertwoimg.enabled = true;
             playertwobutton.enabled = false;
         }
         else
         {
-            playertwo.color = Color.red;
+            playertwoimg.enabled = false;
             playertwobutton.enabled = true;
         }
 
         if (gm.playerthree)
         {
-            playerthree.color = Color.white;
+            playerthreeimg.enabled = true;
             playerthreebutton.enabled = false;
         }
         else
         {
-            playerthree.color = Color.red;
+            playerthreeimg.enabled = false;
             playerthreebutton.enabled = true;
         }
 
         if (gm.playerfour)
         {
-            playerfour.color = Color.white;
+            playerfourimg.enabled = true;
             playerfourbutton.enabled = false;
         }
         else
         {
-            playerfour.color = Color.red;
+            playerfourimg.enabled = false;
             playerfourbutton.enabled = true;
         }
 
