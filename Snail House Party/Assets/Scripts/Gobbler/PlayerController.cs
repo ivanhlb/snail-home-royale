@@ -54,6 +54,7 @@ namespace Gobbler
 			spriteRenderer.sprite = gobblerStunnedSprite;
 
 			//play stun sound
+			AudioManager.instance.PlayMunchWrong ();
 		}
 
 		public void GetUnstunned ()
