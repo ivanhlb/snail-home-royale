@@ -213,12 +213,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audios: {fileID: 251211110}
   snailracebgm: {fileID: 8300000, guid: e99eec7db4ffa25419cc11c86027fcb2, type: 3}
-  snailraceStart: {fileID: 8300000, guid: 626bc2217387fd447a4c9934abf9d558, type: 3}
+  snailraceStart: {fileID: 8300000, guid: fb1e1b0c826a0fa4490d085aaf0405f5, type: 3}
   snailraceWalkone: {fileID: 8300000, guid: bf1bacacf7b47c644b1f3ea1b3e520b3, type: 3}
   snailraceWalktwo: {fileID: 8300000, guid: 72e64d4cd997af04fa3becffc681f68c, type: 3}
   snailraceWalkthree: {fileID: 8300000, guid: 1be36980747ed4c40b977fe68767e41d, type: 3}
   snailDeathOne: {fileID: 8300000, guid: e663cb5cfe7a61844b2261ca8c062cad, type: 3}
   snailDeathTwo: {fileID: 8300000, guid: 9d614e4c84752bf47a358fd875bea920, type: 3}
+  snailDeathThree: {fileID: 8300000, guid: 988f0f4f60df43f43bbc7ce13bee033b, type: 3}
+  LevelComplete: {fileID: 8300000, guid: 09a3fa0b398d6604d8d0b4ccfb81109f, type: 3}
+  GameComplete: {fileID: 8300000, guid: 4286315463abece42a56e68080586d7b, type: 3}
+  Munching: {fileID: 8300000, guid: 0a93a2051a1e0974c88a0cc2aaa171ff, type: 3}
+  PlayerJoin: {fileID: 0}
 --- !u!4 &251211109
 Transform:
   m_ObjectHideFlags: 0
