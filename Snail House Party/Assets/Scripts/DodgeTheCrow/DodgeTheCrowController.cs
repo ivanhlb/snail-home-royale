@@ -12,7 +12,12 @@ public class DodgeTheCrowController : MonoBehaviour
     public bool gameStarted { get; private set; } = false;
 #pragma warning disable 0649
     [SerializeField]
-    private Text countdownText;
+    private Sprite[] sprites;
+    public Sprite[] shellSprites;
+    public Sprite[] decoSprites;
+    [Space]
+    [SerializeField]
+    private Image countdownImage;
     [SerializeField]
     private LineRenderer startingLine;
     [SerializeField]
@@ -25,7 +30,7 @@ public class DodgeTheCrowController : MonoBehaviour
     public bool gameWon { get; private set; } = false;
     private DodgeSnail[] snails;
     private GameManager gm;
-    private int secondsLeft = 5;
+    private int secondsLeft = 3;
 
     private void Awake()
     {
@@ -54,34 +59,35 @@ public class DodgeTheCrowController : MonoBehaviour
         if (gm.playerone)
         {
             s.Add(d[0]);
-            d[0].Init(PlayerIndex.PlayerOne);
+            d[0].Init(PlayerIndex.PlayerOne, gm.playeronescore);
         }
         if (gm.playertwo)
         {
             s.Add(d[1]);
-            d[1].Init(PlayerIndex.PlayerTwo);
+            d[1].Init(PlayerIndex.PlayerTwo, gm.playertwoscore);
         }
         if (gm.playerthree)
         {
             s.Add(d[2]);
-            d[2].Init(PlayerIndex.PlayerThree);
+            d[2].Init(PlayerIndex.PlayerThree, gm.playerthreescore);
         }
         if (gm.playerfour)
         {
             s.Add(d[3]);
-            d[3].Init(PlayerIndex.PlayerFour);
+            d[3].Init(PlayerIndex.PlayerFour, gm.playerfourscore);
         }
         snails = s.ToArray();
         if (snails.Length == 0)
         {
             s.Add(d[0]);
-            d[0].Init(PlayerIndex.PlayerOne);
+            d[0].Init(PlayerIndex.PlayerOne, gm.playeronescore);
             snails = new DodgeSnail[1] { d[0] };
         }
     }
 
     internal void Win(DodgeSnail snail)
     {
+        AudioManager.instance.PlayLevelComplete();
         Debug.LogFormat("{0} won!", snail.playerIndex.ToString());
         gameWon = true;
         switch (snail.playerIndex)
@@ -109,16 +115,19 @@ public class DodgeTheCrowController : MonoBehaviour
     IEnumerator CountDownCorountine()
     {
         WaitForSecondsRealtime waitOneSec = new WaitForSecondsRealtime(1f);
-        countdownText.gameObject.SetActive(true);
-        while (secondsLeft > 0)
+        countdownImage.gameObject.SetActive(true);
+        AudioManager.instance.PlayRaceStart();
+        do
         {
             yield return waitOneSec;
-            countdownText.text = (--secondsLeft).ToString();
+            countdownImage.sprite = sprites[--secondsLeft];
         }
+        while (secondsLeft > 0);
         //start game officially.
-        countdownText.gameObject.SetActive(false);
+        countdownImage.gameObject.SetActive(false);
         gameStarted = true;
         Crow.instance.Init();
+        AudioManager.instance.PlayBirbBgm();
         yield return null;
     }
 }
