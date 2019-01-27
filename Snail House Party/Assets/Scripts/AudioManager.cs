@@ -14,6 +14,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip snailraceWalkthree;
     public AudioClip snailDeathOne;
     public AudioClip snailDeathTwo;
+    public AudioClip snailDeathThree;
+    public AudioClip LevelComplete;
+    public AudioClip GameComplete;
+    public AudioClip Munching;
+    public AudioClip PlayerJoin;
     public static AudioManager instance = null;                  
 
 
@@ -65,5 +70,24 @@ public class AudioManager : MonoBehaviour
     {
         audios.PlayOneShot(snailDeathTwo);
     }
-
+    public void PlayDeathThree()
+    {
+        audios.PlayOneShot(snailDeathThree);
+    }
+    public void PlayLevelComplete()
+    {
+        audios.PlayOneShot(LevelComplete);
+    }
+    public void PlayGameComplete()
+    {
+        audios.PlayOneShot(GameComplete);
+    }
+    public void PlayEating()
+    {
+        audios.PlayOneShot(Munching);
+    }
+    public void PlayPlayerJoin()
+    {
+        audios.PlayOneShot(PlayerJoin);
+    }
 }

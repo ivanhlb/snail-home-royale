@@ -6,8 +6,8 @@ using System;
 
 public class bomb : MonoBehaviour
 {
-    [SerializeField]
-    Text timer;
+    /*[SerializeField]
+    Text timer;*/
     [SerializeField]
     GameObject playercontroller;
     PlayerSpawner_passthesalt controller;
@@ -15,6 +15,7 @@ public class bomb : MonoBehaviour
 
     public GameObject target;
     public Double timetokill;
+    float saltrotatetime;
     public Double delay = 1;
     public float speed = 1.0f;
     bool gameEnd = false;
@@ -33,6 +34,7 @@ public class bomb : MonoBehaviour
 
         if (timetokill <= 0)
         {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
             if (target != null)
             {
                 controller.playerplaying.Remove(target);
@@ -41,6 +43,9 @@ public class bomb : MonoBehaviour
             int randomtarget = UnityEngine.Random.Range(0, controller.playerplaying.Count - 1);
             target = controller.playerplaying[randomtarget];
             timetokill = UnityEngine.Random.Range(5,9);
+            saltrotatetime = (float)timetokill;
+
+
         }
 
         if (target != null)
@@ -51,7 +56,8 @@ public class bomb : MonoBehaviour
 
         if (controller.playerplaying.Count > 1)
         {
-            timer.text = Math.Round(timetokill, 0).ToString();
+            //timer.text = Math.Round(timetokill, 0).ToString();
+            this.transform.Rotate(Vector3.forward * Time.deltaTime * 180 / saltrotatetime);
             timetokill = timetokill - Time.deltaTime;
         }
         else

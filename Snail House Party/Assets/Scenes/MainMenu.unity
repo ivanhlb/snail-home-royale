@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -219,6 +219,11 @@ MonoBehaviour:
   snailraceWalkthree: {fileID: 8300000, guid: 1be36980747ed4c40b977fe68767e41d, type: 3}
   snailDeathOne: {fileID: 8300000, guid: e663cb5cfe7a61844b2261ca8c062cad, type: 3}
   snailDeathTwo: {fileID: 8300000, guid: 9d614e4c84752bf47a358fd875bea920, type: 3}
+  snailDeathThree: {fileID: 8300000, guid: 988f0f4f60df43f43bbc7ce13bee033b, type: 3}
+  LevelComplete: {fileID: 8300000, guid: 09a3fa0b398d6604d8d0b4ccfb81109f, type: 3}
+  GameComplete: {fileID: 8300000, guid: 4286315463abece42a56e68080586d7b, type: 3}
+  Munching: {fileID: 8300000, guid: 0a93a2051a1e0974c88a0cc2aaa171ff, type: 3}
+  PlayerJoin: {fileID: 0}
 --- !u!4 &251211109
 Transform:
   m_ObjectHideFlags: 0
