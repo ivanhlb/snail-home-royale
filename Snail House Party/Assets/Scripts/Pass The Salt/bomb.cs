@@ -20,7 +20,7 @@ public class bomb : MonoBehaviour
     public float speed = 1.0f;
     bool gameEnd = false;
     public GameObject blowup;
-    float delaytimer = 5;
+    float delaytimer = 3;
     // Start is called before the first frame update
     void Start()
     {
