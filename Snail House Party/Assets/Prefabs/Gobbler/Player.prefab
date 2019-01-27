@@ -102,7 +102,7 @@ MonoBehaviour:
   gobblerShellPos1: {x: 0, y: -0.3, z: 0}
   gobblerShellPos2: {x: 0, y: 0.04, z: 0}
   gobblerShellStunPos: {x: 0.04, y: -0.11, z: 0}
-  gobbleDuration: 0.2
+  gobbleDuration: 0.15
 --- !u!1 &3321262666813480622
 GameObject:
   m_ObjectHideFlags: 0

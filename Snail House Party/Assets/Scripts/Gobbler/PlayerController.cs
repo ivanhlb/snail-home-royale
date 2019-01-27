@@ -33,6 +33,7 @@ namespace Gobbler
 			gobbleAnimationCoroutine = StartCoroutine (GobbleAnimationCoroutine ());
 
 			//play gobble sound
+			AudioManager.instance.PlayEating ();
 		}
 
 		IEnumerator GobbleAnimationCoroutine ()
