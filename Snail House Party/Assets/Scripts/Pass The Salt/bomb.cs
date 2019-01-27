@@ -41,6 +41,7 @@ public class bomb : MonoBehaviour
             {
                 controller.playerplaying.Remove(target);
                 Instantiate(blowup, target.transform.position, Quaternion.identity);
+                AudioManager.instance.PlayDeathThree();
                 Destroy(target);
             }
             int randomtarget = UnityEngine.Random.Range(0, controller.playerplaying.Count - 1);

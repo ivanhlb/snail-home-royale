@@ -31,7 +31,7 @@ public class PlayerSpawner_passthesalt : MonoBehaviour
 
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         bomb.SetActive(false);
-
+        AudioManager.instance.PlaySaltBgm();
         
     }
 
