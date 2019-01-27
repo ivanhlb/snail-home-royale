@@ -58,8 +58,7 @@ public class GameManager : MonoBehaviour
     {
 		if (scoreScreenCoroutine != null)
 			StopCoroutine (scoreScreenCoroutine);
-
-		scoreScreenCoroutine = StartCoroutine (ScoreScreenCoroutine ());
+        scoreScreenCoroutine = StartCoroutine (ScoreScreenCoroutine ());
 	}
 
 	IEnumerator ScoreScreenCoroutine ()
@@ -75,7 +74,9 @@ public class GameManager : MonoBehaviour
 
 	void ShowScoreScreen ()
 	{
-		scoreScreen = Instantiate (scoreScreenPrefab, Vector3.zero, Quaternion.identity);
+        AudioManager.instance.GetComponent<AudioSource>().Stop();
+        AudioManager.instance.PlayLevelComplete();
+        scoreScreen = Instantiate (scoreScreenPrefab, Vector3.zero, Quaternion.identity);
 		scoreScreen.SetScore (1, playeronescore);
 		scoreScreen.SetScore (2, playertwoscore);
 		scoreScreen.SetScore (3, playerthreescore);
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
 
 	void LoadGame ()
 	{
+        AudioManager.instance.GetComponent<AudioSource>().Stop();
         if (gamecount < 5)
         {
             if (gamecount == 2)
@@ -135,6 +137,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            AudioManager.instance.PlayGameComplete();
             SceneManager.LoadScene(6);
         }
 	}
