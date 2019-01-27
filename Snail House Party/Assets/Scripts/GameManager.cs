@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour
     {
 		if (scoreScreenCoroutine != null)
 			StopCoroutine (scoreScreenCoroutine);
-
-		scoreScreenCoroutine = StartCoroutine (ScoreScreenCoroutine ());
+        AudioManager.instance.GetComponent<AudioSource>().Stop();
+        scoreScreenCoroutine = StartCoroutine (ScoreScreenCoroutine ());
 	}
 
 	IEnumerator ScoreScreenCoroutine ()
