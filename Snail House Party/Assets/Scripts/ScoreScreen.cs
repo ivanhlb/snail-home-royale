@@ -32,7 +32,7 @@ public class ScoreScreen : MonoBehaviour
 
 		if (score >= 3)
 		{
-			sprite = shellTiers[3];
+			sprite = shellTiers[2];
 			if (score == 4)
 				overlaySprite = shellTiers[4];
 			if (score == 5)

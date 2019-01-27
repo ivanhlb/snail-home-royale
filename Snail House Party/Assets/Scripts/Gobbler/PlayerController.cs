@@ -33,6 +33,7 @@ namespace Gobbler
 			gobbleAnimationCoroutine = StartCoroutine (GobbleAnimationCoroutine ());
 
 			//play gobble sound
+			AudioManager.instance.PlayEating ();
 		}
 
 		IEnumerator GobbleAnimationCoroutine ()
@@ -53,6 +54,7 @@ namespace Gobbler
 			spriteRenderer.sprite = gobblerStunnedSprite;
 
 			//play stun sound
+			AudioManager.instance.PlayMunchWrong ();
 		}
 
 		public void GetUnstunned ()
