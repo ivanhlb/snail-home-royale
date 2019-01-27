@@ -40,7 +40,7 @@ public class bomb : MonoBehaviour
             }
             int randomtarget = UnityEngine.Random.Range(0, controller.playerplaying.Count - 1);
             target = controller.playerplaying[randomtarget];
-            timetokill = 50;
+            timetokill = UnityEngine.Random.Range(5,9);
         }
 
         if (target != null)

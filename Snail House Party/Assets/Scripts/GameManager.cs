@@ -133,5 +133,9 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(gamefour);
             }
         }
+        else
+        {
+            SceneManager.LoadScene(6);
+        }
 	}
 }
