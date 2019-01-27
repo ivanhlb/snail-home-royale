@@ -70,6 +70,11 @@ namespace Gobbler
 			GenerateFoodSequence ();
 		}
 
+		private void Start ()
+		{
+			AudioManager.instance.PlayGobblerBgm ();
+		}
+
 		// Update is called once per frame
 		void Update ()
 		{
