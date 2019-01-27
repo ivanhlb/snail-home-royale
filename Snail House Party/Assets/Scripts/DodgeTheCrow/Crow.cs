@@ -78,7 +78,7 @@ public class Crow : AnimatedSprite
     IEnumerator PlaySquaksCoroutine()
     {
         WaitForSecondsRealtime oneSecond = new WaitForSecondsRealtime(1);
-        waittoTurnTimer = Random.Range(0, 3);
+        waittoTurnTimer = Random.Range(1, 3);
         while (enabled)
         {
             AudioManager.instance.PlayCrowCaw();
