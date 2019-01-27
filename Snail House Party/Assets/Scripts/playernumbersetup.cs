@@ -96,7 +96,7 @@ public class playernumbersetup : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Joystick1Button9) || Input.GetKeyUp(KeyCode.Joystick2Button9) || Input.GetKeyUp(KeyCode.Joystick3Button9) || Input.GetKeyUp(KeyCode.Joystick4Button9))
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(gm.gameone);
             }
         }
     }

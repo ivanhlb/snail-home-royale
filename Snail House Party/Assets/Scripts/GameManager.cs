@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class GameManager : MonoBehaviour
     public int playertwoscore;
     public int playerthreescore;
     public int playerfourscore;
+
+    public int gameone;
+    int gametwo;
+    int gamethree;
+    int gamefour;
+
+    int gamecount = 1;
 
 	Coroutine scoreScreenCoroutine;
 
@@ -59,6 +67,7 @@ public class GameManager : MonoBehaviour
 		ShowScoreScreen ();
 		yield return new WaitForSeconds (3);
 		HideScoreScreen ();
+        gamecount++;
 		LoadGame ();
 
 		scoreScreenCoroutine = null;
@@ -73,13 +82,56 @@ public class GameManager : MonoBehaviour
 		scoreScreen.SetScore (4, playerfourscore);
 	}
 
-	void HideScoreScreen ()
+    private void Start()
+    {
+        gameone = Random.Range(2,6);
+
+        gametwo = Random.Range(2, 6);
+
+        gamethree = Random.Range(2, 6);
+        
+        gamefour = Random.Range(2, 6);
+    }
+
+    private void Update()
+    {
+        if (gametwo == gameone)
+        {
+            gametwo = Random.Range(2, 6);
+        }
+
+        if (gamethree == gameone || gamethree == gametwo)
+        {
+            gamethree = Random.Range(2, 6);
+        }
+
+        if (gamefour == gameone || gamefour == gametwo || gamefour == gamethree)
+        {
+            gamefour = Random.Range(2, 6);
+        }
+    }
+
+    void HideScoreScreen ()
 	{
 		Destroy (scoreScreen.gameObject);
 	}
 
 	void LoadGame ()
 	{
-		
+        if (gamecount < 5)
+        {
+            if (gamecount == 2)
+            {
+                SceneManager.LoadScene(gametwo);
+            }
+            if (gamecount == 3)
+            {
+                SceneManager.LoadScene(gamethree);
+            }
+            if (gamecount == 4)
+            {
+                SceneManager.LoadScene(gamefour);
+            }
+        }
 	}
 }
