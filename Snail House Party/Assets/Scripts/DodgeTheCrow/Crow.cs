@@ -45,13 +45,14 @@ public class Crow : AnimatedSprite
     }
     public void Alert()
     {
+        AudioManager.instance.PlayCrowAlert();
         indicator.text = "!";
         isAlert = true;
         indicator.color = Color.red;
     }
     private void AttackSnail(DodgeSnail snail)
     {
-        //AudioManager.instance.playAttackSound()   //TO IMPLEMENT
+        AudioManager.instance.PlayCrowAttack();   
         animator.CrossFade(attackHash, 0.1f);
         sp.flipX = true;
         alertTimeLeft = 1.5f;
@@ -80,7 +81,7 @@ public class Crow : AnimatedSprite
         waittoTurnTimer = Random.Range(2, 7);
         while (enabled)
         {
-            //AudioManager.instance.PlayBirdSqwak();    //TO IMPLEMENT.
+            AudioManager.instance.PlayCrowCaw();
             yield return oneSecond;
             if (--waittoTurnTimer == 0)
             {
@@ -121,6 +122,20 @@ public class Crow : AnimatedSprite
             transform.position = Vector3.MoveTowards(transform.position, destination, 0.5f);
             yield return null;
         }
+        float rng = Random.value;
+        if (rng < 0.33f)
+        {
+            AudioManager.instance.PlayDeathOne();
+        }
+        else if (rng < 0.66f)
+        {
+            AudioManager.instance.PlayDeathTwo();
+        }
+        else
+        {
+            AudioManager.instance.PlayDeathThree();
+        }
+
         snail.transform.position = snail.startPos;
         snail.spriteRenderer.enabled = true;
         snail.deco.enabled = true;

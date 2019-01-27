@@ -87,6 +87,7 @@ public class DodgeTheCrowController : MonoBehaviour
 
     internal void Win(DodgeSnail snail)
     {
+        AudioManager.instance.PlayLevelComplete();
         Debug.LogFormat("{0} won!", snail.playerIndex.ToString());
         gameWon = true;
         switch (snail.playerIndex)
@@ -115,10 +116,10 @@ public class DodgeTheCrowController : MonoBehaviour
     {
         WaitForSecondsRealtime waitOneSec = new WaitForSecondsRealtime(1f);
         countdownImage.gameObject.SetActive(true);
+        AudioManager.instance.PlayRaceStart();
         do
         {
             yield return waitOneSec;
-
             countdownImage.sprite = sprites[--secondsLeft];
         }
         while (secondsLeft > 0);
@@ -126,6 +127,7 @@ public class DodgeTheCrowController : MonoBehaviour
         countdownImage.gameObject.SetActive(false);
         gameStarted = true;
         Crow.instance.Init();
+        AudioManager.instance.PlayBirbBgm();
         yield return null;
     }
 }

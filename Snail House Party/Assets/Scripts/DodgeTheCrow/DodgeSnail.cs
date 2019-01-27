@@ -47,7 +47,6 @@ public class DodgeSnail : AnimatedSprite
             case PlayerIndex.PlayerOne:
                 personalButton = KeyCode.Joystick1Button1;
                 shellRenderer.color = Color.red;
-                personalButton = KeyCode.X;
                 break;
             case PlayerIndex.PlayerTwo:
                 personalButton = KeyCode.Joystick2Button1;

@@ -103,10 +103,5 @@ public class playernumbersetup : MonoBehaviour
                 SceneManager.LoadScene(gm.gameone);
             }
         }
-        else if (Input.GetKeyUp(KeyCode.F1))
-        {
-            SceneManager.LoadScene(2);
-            //SceneManager.LoadScene(gm.gameone);
-        }
     }
 }
