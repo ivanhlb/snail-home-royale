@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class playernumbersetup : MonoBehaviour
 {
     GameManager gm;
-    
+
     public Image playerone;
     public Image playertwo;
     public Image playerthree;
@@ -102,6 +102,11 @@ public class playernumbersetup : MonoBehaviour
             {
                 SceneManager.LoadScene(gm.gameone);
             }
+        }
+        else if (Input.GetKeyUp(KeyCode.F1))
+        {
+            SceneManager.LoadScene(2);
+            //SceneManager.LoadScene(gm.gameone);
         }
     }
 }
