@@ -61,6 +61,8 @@ namespace Gobbler
 		float p4HorPrev;
 		float p4VertPrev;
 
+		bool gameWon = false;
+
 		// Start is called before the first frame update
 		void Awake ()
 		{
@@ -68,14 +70,17 @@ namespace Gobbler
 			GenerateFoodSequence ();
 		}
 
-		void Start ()
+		private void Start ()
 		{
-
+			AudioManager.instance.PlayGobblerBgm ();
 		}
 
 		// Update is called once per frame
 		void Update ()
 		{
+			if (gameWon)
+				return;
+
 			if (!ready)
 			{
 				SetReady ();
@@ -474,6 +479,7 @@ namespace Gobbler
 				//check for game win
 				if (playerLanePositions[playerIndex].childCount == 0)
 				{
+					gameWon = true;
 					switch (playerIndex)
 					{
 						case 0:
