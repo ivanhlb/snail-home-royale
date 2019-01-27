@@ -379,6 +379,7 @@ MonoBehaviour:
   timetokill: 5
   delay: 1
   speed: 1000
+  blowup: {fileID: 1400149324016461589, guid: 5d50a95ab10958e44a8d3ac5e9b6d0ac, type: 3}
 --- !u!212 &682380252
 SpriteRenderer:
   m_ObjectHideFlags: 0

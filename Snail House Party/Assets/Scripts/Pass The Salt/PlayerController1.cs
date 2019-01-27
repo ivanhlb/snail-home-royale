@@ -11,6 +11,7 @@ public class PlayerController1 : MonoBehaviour
     bomb bm;
     public GameObject[] shell;
     Animator am;
+    
 
     // Start is called before the first frame update
     void Start()

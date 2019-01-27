@@ -19,6 +19,8 @@ public class bomb : MonoBehaviour
     public Double delay = 1;
     public float speed = 1.0f;
     bool gameEnd = false;
+    public GameObject blowup;
+    float delaytimer = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,7 @@ public class bomb : MonoBehaviour
             if (target != null)
             {
                 controller.playerplaying.Remove(target);
+                Instantiate(blowup, target.transform.position, Quaternion.identity);
                 Destroy(target);
             }
             int randomtarget = UnityEngine.Random.Range(0, controller.playerplaying.Count - 1);
@@ -61,6 +64,16 @@ public class bomb : MonoBehaviour
             timetokill = timetokill - Time.deltaTime;
         }
         else
+        {
+            
+            delaytimer -= Time.deltaTime;
+            if (delaytimer <= 0)
+            {
+                GameEnd();
+            }
+        }
+
+        void GameEnd()
         {
             if (target.GetComponent<PlayerController1>().playerid == 1 && gameEnd == false)
             {
@@ -86,9 +99,9 @@ public class bomb : MonoBehaviour
                 gm.loadnextgame();
                 gameEnd = true;
             }
-        }
 
-        
+
+        }
 
     }
 }

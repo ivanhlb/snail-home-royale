@@ -223,7 +223,7 @@ MonoBehaviour:
   LevelComplete: {fileID: 8300000, guid: 09a3fa0b398d6604d8d0b4ccfb81109f, type: 3}
   GameComplete: {fileID: 8300000, guid: 4286315463abece42a56e68080586d7b, type: 3}
   Munching: {fileID: 8300000, guid: 0a93a2051a1e0974c88a0cc2aaa171ff, type: 3}
-  PlayerJoin: {fileID: 0}
+  PlayerJoin: {fileID: 8300000, guid: ad87438186ae7204e88342b396fb608f, type: 3}
 --- !u!4 &251211109
 Transform:
   m_ObjectHideFlags: 0
